@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-04-2024 a las 18:36:16
+-- Tiempo de generación: 16-04-2024 a las 20:26:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -136,27 +136,13 @@ INSERT INTO `psicologo` (`id_psicologo`, `nombre`, `correo_institucional`, `cont
 --
 
 CREATE TABLE `publicacion` (
-  `id_publicacion` int(11) NOT NULL,
+  `id_publicacion` int(1) NOT NULL,
   `id_psicologo` int(11) NOT NULL,
-  `titulo` varchar(25) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
   `contenido` text NOT NULL,
   `fecha_publicacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `tipo` enum('evento','anuncio','consejo','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `publicacion`
---
-
-INSERT INTO `publicacion` (`id_publicacion`, `id_psicologo`, `titulo`, `contenido`, `fecha_publicacion`, `tipo`) VALUES
-(1, 1, 'title xdxdxdxdxdxdxd', 'b', '2024-04-11 03:11:57', 'evento'),
-(2, 1, 'title xdxdxdxdxdxdxd', 'otro mas ', '2024-04-11 03:14:46', 'evento'),
-(3, 1, 'title 3', 'consejo 3', '2024-04-11 03:19:34', 'consejo'),
-(4, 1, 'Matar gente', 'mataremos gente el 25 de abril ', '2024-04-13 05:42:57', 'evento'),
-(14, 1, 'asd', 'asd', '2024-04-13 16:07:28', 'evento'),
-(15, 1, 'JARABITA ', 'jarabita quiere hablarles', '2024-04-15 13:00:48', 'anuncio'),
-(16, 1, 'asdasd', 'adasd', '2024-04-16 00:02:47', 'evento'),
-(17, 1, 'adsda', 'asdsadas', '2024-04-16 02:58:32', 'evento');
 
 -- --------------------------------------------------------
 
@@ -297,7 +283,7 @@ ALTER TABLE `psicologo`
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_publicacion` int(1) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `sede`
