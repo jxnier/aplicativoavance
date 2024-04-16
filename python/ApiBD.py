@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify, redirect, send_file, url_for, render_template
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
-import os
 from werkzeug.utils import secure_filename
 
 #############################################################################################################################

@@ -213,7 +213,8 @@ main.sign-up-mode .carousel {
   height: 100%;
   width: 55%;
   left: 45%;
-  background-image: url("../assets/fondologin.png") ;
+  background-image: url("../assets/fondologin.png");
+  background-size: cover; 
   top: 0;
   border-radius: 2rem;
   display: grid;
@@ -222,6 +223,7 @@ main.sign-up-mode .carousel {
   overflow: hidden;
   transition: 0.8s ease-in-out;
 }
+
 
 .images-wrapper {
   display: grid;
