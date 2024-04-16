@@ -413,6 +413,16 @@ def grafica_tipo_documento():
         return jsonify({'error': str(e)})
     
 
+########################################################## OBTENER PACIENTES ######################################
+
+@app.route('/allpaciente', methods=['GET'])
+def allpaciente():
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT id_paciente, nombre, identificacion FROM paciente")
+    pacientes = cursor.fetchall()
+    pacientes_dict = [{"id": paciente[0], "nombre": paciente[1], "identificacion": paciente[2]} for paciente in pacientes]
+    return jsonify(pacientes_dict)
+
 
     
 ########################################################### Predecir paciente ####################################################
