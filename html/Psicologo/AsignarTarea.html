@@ -36,21 +36,20 @@
             <h2 class="text-center">Asignar tareas</h2>
             <form action="/registrar_tarea" method="POST">
                 <div class="form-group">
-                    <label for="paciente">Paciente:</label>
+                    <label for="paciente">Seleccionar Paciente: </label>
                     <select id="paciente" name="paciente_id" required>
+                        <option disabled selected> </option>
                     </select>
                 </div>
+                <p>
                 <div class="form-group">
                     <label for="titulo">Título de la Tarea:</label>
                     <input type="text" class="form-control" id="titulo" name="titulo" required>
                 </div>
+                <p>
                 <div class="form-group">
                     <label for="descripcion">Descripción de la Tarea:</label>
                     <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="fecha_cierre">Fecha de Cierre:</label>
-                    <input type="date" class="form-control" id="fecha_cierre" name="fecha_cierre" required>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Agregar Tarea</button>
             </form>
