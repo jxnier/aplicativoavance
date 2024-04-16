@@ -423,6 +423,45 @@ def allpaciente():
     pacientes_dict = [{"id": paciente[0], "nombre": paciente[1], "identificacion": paciente[2]} for paciente in pacientes]
     return jsonify(pacientes_dict)
 
+########################################################## ASIGNAR TAREA ######################################
+
+@app.route('/registrar_tarea', methods=['POST'])
+def registrar_tarea():
+    try:
+        if request.method == 'POST':
+            # Obtener el correo electrónico del psicólogo desde el cuerpo de la solicitud JSON
+            correo_psico = request.json.get('psicologo_id')
+            
+            # Consultar el ID del psicólogo basado en su correo electrónico
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT id_psicologo FROM psicologo WHERE correo_institucional = %s", [correo_psico])
+            result = cur.fetchone()
+            
+            # Verificar si se encontró el psicólogo
+            if result is not None:
+                psicologo_id = result[0]
+                
+                # Obtener los demás datos de la tarea desde el cuerpo de la solicitud JSON
+                tarea = request.json
+                paciente_id = tarea.get('paciente_id')
+                titulo = tarea.get('titulo')
+                descripcion = tarea.get('descripcion')
+                
+                # Insertar la tarea en la base de datos
+                cur.execute("INSERT INTO tarea (id_psicologo, id_paciente, titulo, descripcion) VALUES (%s, %s, %s, %s)", 
+                            (psicologo_id, paciente_id, titulo, descripcion))
+                mysql.connection.commit()
+                cur.close()
+                
+                # Retornar una respuesta exitosa
+                return jsonify({"mensaje": "Tarea registrada exitosamente"})
+            else:
+                return jsonify({"error": "No se encontró ningún psicólogo con el correo electrónico proporcionado"})
+        else:
+            return jsonify({"error": "Método no válido para esta ruta"})
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Ocurrió un error al procesar la solicitud"})
 
     
 ########################################################### Predecir paciente ####################################################
