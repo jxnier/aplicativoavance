@@ -17,7 +17,6 @@ const cerrarsesion = () => {
     window.location = "../../index.html";
 }
 
-// Función para registrar un avance personal
 function registrarAvancePersonal() {
     const contenido = document.getElementById('avance').value;
     if (!contenido.trim()) {
@@ -47,6 +46,8 @@ function registrarAvancePersonal() {
         alert('Error al registrar el avance personal.');
         });
 }
+
+
 
 function obtenerAvancesPersonales() {
     if (tu.correo_institucional) {
