@@ -463,7 +463,29 @@ def registrar_tarea():
         print(e)
         return jsonify({"error": "Ocurrió un error al procesar la solicitud"})
 
-    
+    ########## MOSTRAR GRADO DE SALUD Y PDF (HISTORIAL CLINICO)##############################
+@app.route('/psico', methods=['GET'])
+def psico():
+    try:
+        if request.method == 'GET':
+            cur = mysql.connection.cursor()
+            cur.execute('SELECT * FROM paciente')
+            rv = cur.fetchall()
+            cur.close()
+            payload = []
+            content = {}
+            for result in rv:
+                content = {'nombre': result[1], 'tipo_documento': result[4], 'identificacion': result[5], 'correo_institucional': result[2], 'grado_salud': result[7],'historial_clinico': result[8]}
+                payload.append(content)
+                content = {}
+            return jsonify(payload)
+        else:
+            return jsonify({"error": "Método no válido para esta ruta"})
+    except Exception as e:
+        print(e)
+        return jsonify({"información":e})
+
+
 ########################################################### Predecir paciente ####################################################
 
 # @app.route('/prediccion', methods=['POST'])

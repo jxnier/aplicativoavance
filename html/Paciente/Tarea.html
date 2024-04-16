@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <script src="../../js/Paciente/ValidarInicoPaciente.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asignar Tarea</title>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <title>Lista de Tareas</title>
+    <link rel="stylesheet" href="../../css/tarea.css">
     <link rel="shortcut icon" href="../../assets/logo iub.png" type="image/x-icon">
 </head>
 <body>
@@ -16,34 +15,38 @@
                     <img src="../../assets/logo-itsa.png" alt="Logo de la IUB" height="50">
                 </a>
             </div>
-            <nav class="col-md-6 navbar navbar-expand-md navbar-light justify-content-end">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="0Paciente.html" class="nav-link">Atrás</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <div class="col-md-6 text-right"> <!-- Cambiado el div a la derecha -->
+                <nav class="navbar navbar-expand-md navbar-light justify-content-end">
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="0Paciente.html" class="nav-link">Atrás</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
     </header>
-    <main>
 
+    <main class="mt-5"> <!-- Añadido margen superior para separar del header -->
+        <h1>Lista de Tareas</h1>
+        <h2>Tareas completadas</h2>
+        <ul id="tareascompletadas"></ul>
+        <h2>Tareas pendientes</h2>
+        <ul id="tareaspendientes"></ul>
     </main>
-    <script src="../../js/bootstrap.bundle.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
