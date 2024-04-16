@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="shortcut icon" href="../../assets/logo iub.png" type="image/x-icon">
     <script src="../../js/Psicologo/ValidarInicioPsico.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"/>
 </head>
 <body>
     <header class="container-fluid bg-light py-3">
@@ -32,8 +33,31 @@
         </div>
     </header>
     <main class="container mt-5">
-        <p>Se muestran todos los historiales clinicos de los pacientes</p>
-    </main>
+        <div class="card">
+            <div class="card-header">
+                <span><i class="bi bi-table me-2"></i></span> Data Table
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped data-table" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Nombre del paciente</th>
+                                <th>Tipo de documento</th>
+                                <th>Numero de documento</th>
+                                <th>Correo institucional</th>
+                                <th>Resultado de la predicción</th>
+                                <th>Historial clinico</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>    </main>
     <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/Administrador/DataTable/jquery-3.5.1.js"></script>
+    <script src="../../js/Administrador/DataTable/jquery.dataTables.min.js"></script>
+    <script src="../../js/Administrador/DataTable/dataTables.bootstrap5.min.js"></script>
+    <script src="../../js/Paciente/tabla.js"></script>
 </body>
 </html>
