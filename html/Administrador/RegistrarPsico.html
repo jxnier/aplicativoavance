@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="../../js/Administrador/ValidarInicioAdmin.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/logo iub.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <title>Registro de Psicólogo</title>
+</head>
+<body>
+    <header class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <a class="navbar-brand" href="https://www.unibarranquilla.edu.co/" target="_blank">
+                    <img src="../../assets/logo-itsa.png" alt="Logo de la IUB" height="50">
+                </a>
+            </div>
+            <nav class="col-md-6 navbar navbar-expand-md navbar-light justify-content-end">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="0Administrador.html" class="nav-link">Atrás</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="mt-4 text-center">Registro de Psicólogo(a)</h1>
+        <form id="registroForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" id="contraseña" name="contraseña" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="correo_institucional">Correo Institucional:</label>
+                        <input type="email" id="correo_institucional" name="correo_institucional" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="identificacion">Numero de Identificación:</label>
+                        <input type="number" id="identificacion" name="identificacion" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <button onclick="RegistrarPsicologo(event)" class="btn btn-primary btn-block">Registrarse</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js/Administrador/RegistroPsicologoAdmin.js"></script>
+    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f8ff;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-img img {
+    height: 50px;
+}
+
+button#logout-button {
+    background-color: #f9f8ff;
+    color: #070707;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.icon {
+    font-size: 2rem; 
+}
+
+button#logout-button:hover {
+    color: #f9f8ff;
+    background-color: #d32f2f;
+}
+
+.sorting::before,
+.sorting_asc::before,
+.sorting_desc::before {
+    display: inline-block;
+    margin-right: .3em;
+    content: "\2195";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-style: normal;
+    font-size: .75em;
+    color: #007bff; 
+}
+
+.sorting_asc::before {
+    content: "\25B2"; 
+}
+
+.sorting_desc::before {
+    content: "\25BC"; 
+}
+
+main {
+    max-width: 50%;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.boton_ {
+    margin: 10px;
+    font-size: 20px;
+    text-align: center; /* Centra el texto */
+}
+
+#color {
+    font-size: 100px;
+    color: black;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+.boton {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.boton button {
+    width: 70%; /* Asegura que los botones ocupen todo el ancho de su contenedor */
+    height: 100px; /* Altura fija para todos los botones */
+}
+
+.boton a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.boton a .icon {
+    margin-right: 10px;
+}
+
+.boton a h5 {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .boton button {
+        width: calc(50% - 20px); /* Ajusta el ancho de los botones en dispositivos móviles */
+    }
+}
+
+@media (max-width: 576px) {
+    .boton button {
+        width: calc(100% - 20px); /* Ajusta el ancho de los botones en dispositivos extra pequeños */
+    }
+}
+
+/* Reglas de medios para pantallas más pequeñas */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column; /* Apila los elementos en pantallas pequeñas */
+    }
+
+    .boton {
+        margin: 10px; /* Espaciado adicional en pantallas pequeñas */
+    }
+
+    .boton_ {
+        margin: 10px;
+        font-size: 16px;
+    }
+
+    #color {
+        font-size: 60px;
+    }
+}
+
+.fa-custom-size {
+    font-size: 2rem; 
+}
+
+.boton a {
+    display: flex;
+    align-items: center;
+}
+
+.boton a i {
+    margin-right: 10px; 
+}
+

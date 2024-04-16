@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psicólogo</title>
+    <script src="../../js/Psicologo/ValidarInicioPsico.js"></script>
+    <link rel="shortcut icon" href="../../assets/logo iub.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/lineas.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/administrador.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://kit.fontawesome.com/2424c89a71.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="https://www.unibarranquilla.edu.co/" target="_blank">
+                    <img src="../../assets/logo-itsa.png" alt="Logo de la IUB" height="50">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav nav nav-pills">
+                            <li class="nav-item active mx-2">
+                                <button class="btn" id="perfilModalLabel" data-toggle="modal"
+                                    data-target="#perfilPsicologoModal">Perfil</button>
+                            </li>
+                            <li class="nav-item active mx-2">
+                                <button class="btn" onclick="cerrarsesion()">Cerrar Sesión</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/cita.png" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Agendar y Mostrar Citas</h5>
+                        <p class="card-text">Agendar cita a partir de la disponibilidad de horario y mostrarlas.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary w-100">Agendar cita</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/tareas.png" class="card-img-top" alt="solicitar cita" style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Asignar tareas y ver estado</h5>
+                        <p class="card-text">Aquí puede encontrar las tareas que ha asignado y en qué estado están por
+                            parte de su paciente.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="AsignarTarea.html" class="btn btn-primary w-100">Asignar tareas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/a.png" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Publicar consejos y eventos</h5>
+                        <p class="card-text">Puede publicas sus consejos personales a los estudiantes y a su vez
+                            informar de los distintos eventos que hay disponibles acerca de la salud mental y bienestar
+                            emocional.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="Publicar.html" class="btn btn-primary w-100">Publicar consejos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/diagnostic.png" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Ver e imprimir diagnóstico o historial clínico</h5>
+                        <p class="card-text">Aquí puede encontrar el diagnóstico de su paciente y puede imprimirlo.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="historialClinico.html" class="btn btn-primary w-100">Crear e imprimir diagnóstico</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/ia.jpeg" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Predicción del formulario de IA</h5>
+                        <p class="card-text">Aquí puede encontrar los resultados del formulario de predicción basado en
+                            las respuestas de sus pacientes.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="PrediccionIA.html" class="btn btn-primary w-100">Ir a los resultados</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/disponibilidad.png" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Disponibilidad</h5>
+                        <p class="card-text">Aquí puede encontrar su disponibilidad.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="Disponibilidad.html" class="btn btn-primary w-100">Disponibilidad</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="perfilPsicologoModal" tabindex="-1" role="dialog" aria-labelledby="perfilModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="perfilModalLabel">Perfil de Psicólogo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Nombre Completo:</strong> Juanchito Prueba</p>
+                        <p><strong>Rol: </strong> Psicólogo</p>
+                        <p><strong>Correo: </strong> juanprueba@unibarranquilla.edu.co</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicia Sesión</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="shortcut icon" href="../assets/logo iub.png" type="image/x-icon">
+</head>
+<body>
+    <main>
+        <div class="box">
+            <div class="inner-box">
+                <div class="forms-wrap">
+                    <form autocomplete="off" class="sign-in-form">
+                        <div class="logo"></div>
+                        <div class="heading">
+                            <h2>Ingresar</h2>
+                            <h6>Aún no estás registrado?</h6>
+                            <a href="#" class="toggle">Regístrate</a>
+                        </div>
+                        <div class="input-wrap">
+                            <select class="input-field" id="rol" required>
+                                <option value="" disabled selected></option>
+                                <option value="psicologo">Psicólogo</option>
+                                <option value="paciente">Paciente</option>
+                                <option value="administrador">Administrador</option>
+                            </select>
+                            <label>Rol</label>
+                        </div>
+                        <div class="actual-form">
+                            <div class="input-wrap">
+                                <input type="text" minlength="4" class="input-field" id="correo_institucional" autocomplete="off" required>
+                                <label>Correo institucional</label>
+                            </div>
+                            <div class="input-wrap">
+                                <input type="password" minlength="4" class="input-field" id="contraseña" autocomplete="off" required>
+                                <label>Contraseña</label>
+                            </div>
+                            <input type="button" value="Ingresar" class="sign-btn" id="login">
+                        </div>
+                    </form>
+                    <form autocomplete="off" class="sign-up-form" id="register-form">
+                        <div class="logo"></div>
+                        <div class="heading">
+                            <h2>Regístrate</h2>
+                            <h6>Ya tienes una cuenta?</h6>
+                            <a href="#" class="toggle">Ingresa</a>
+                        </div>
+                        <div class="actual-form">
+                            <div class="input-wrap">
+                                <input type="text" id="nombreregister" minlength="4" class="input-field" autocomplete="off" required>
+                                <label>Nombre completo</label>
+                            </div>
+                            <div class="input-wrap">
+                                <select class="input-field" name="tipo_documento" id="tipodocumentoregister" required>
+                                    <option value="" disabled selected> </option>
+                                    <option value="cc">Cédula Ciudadanía (C.C.)</option>
+                                    <option value="ti">Tarjeta de Identidad (T.I.)</option>
+                                </select>
+                                <label>Tipo de documento</label>
+                            </div>
+                            <div class="input-wrap">
+                                <input type="text" class="input-field" id="documentoregister" name="documento" autocomplete="off" required>
+                                <label>Número de documento</label>
+                            </div>
+                            <div class="input-wrap">
+                                <input type="email" class="input-field" id="correoregister" autocomplete="off" required>
+                                <label>Correo institucional</label>
+                            </div>
+                            <div class="input-wrap">
+                                <input type="password" id="contraseñaregister" minlength="4" class="input-field" autocomplete="off" required>
+                                <label>Contraseña</label>
+                            </div>
+                            <button class="sign-btn">REGISTRARSE</button> 
+                        </div>
+                    </form>
+                </div>
+                <div class="carousel">
+                    <br>      
+                    <div class="text-slider">
+                        <div class="text-wrap">
+                        <div class="text-group">
+                            <marquee><H2>¡Ingresa al aplicativo para disfrutar
+                            de todas las funciones!
+                            Bienvenido(a)</H2></marquee>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/IniciaSesion/IniciaSesionEfectos.js"></script>
+    <script src="../js/IniciaSesion/IniciarSesionFunciones.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../js/Administrador/ValidarInicioAdmin.js"></script>
+    <link rel="shortcut icon" href="../../assets/logo iub.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/lineas.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/administrador.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+    <script src="https://kit.fontawesome.com/2424c89a71.js" crossorigin="anonymous"></script>
+    <title>Administrador</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="https://www.unibarranquilla.edu.co/" target="_blank">
+                    <img src="../../assets/logo-itsa.png" alt="Logo de la IUB" height="50">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav nav nav-pills">
+                            <li class="nav-item active mx-2">
+                                <a class="dropdown-item" id="perfilModalLabel" href="#" data-toggle="modal"
+                                    data-target="#perfilAdminModal">Perfil</a>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <button class="btn" onclick="cerrarsesion()">Cerrar Sesión</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/register.png" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Registrar psicólogos</h5>
+                        <p class="card-text">Registrar los psicólogos de la institución para que tengan acceso al
+                            aplicativo.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="RegistrarPsico.html" class="btn btn-primary w-100">Registrar psicólogos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/mos.png" class="card-img-top" alt="solicitar cita" style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Mostrar Usuarios</h5>
+                        <p class="card-text">Aquí puede encontrar todos los usuarios que estan registrados dentro del
+                            aplicativo.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="Datatable.html" class="btn btn-primary w-100">Mostrar Usuarios</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/dasb.jpg" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Dashboard</h5>
+                        <p class="card-text">Puede ver todas las gráficas relacionadas al aplicativo.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="DashBoard.html" class="btn btn-primary w-100">Ver Dashboard</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../../assets/cita.png" class="card-img-top" alt="..." style="height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Citas / Horario</h5>
+                        <p class="card-text">Aquí puede encontrar su horario y todas las citas que tiene pendientes.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="CitaAdministrador.html" class="btn btn-primary w-100">Ver Horario</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="perfilAdminModal" tabindex="-1" role="dialog" aria-labelledby="perfilModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="perfilModalLabel"> Perfil de Administrador</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Nombre Completo:</strong> Admi Strador</p>
+                        <p><strong>Rol: </strong> Administrador</p>
+                        <p><strong>Correo: </strong> admin@unibarranquilla.edu.co</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

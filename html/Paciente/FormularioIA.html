@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="../../js/Paciente/ValidarInicoPaciente.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario IA</title>
+    <link rel="shortcut icon" href="../../assets/logo iub.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/lineas.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="container-md mt-5 mb-5 gap-3">
+    <body class="container-md mt-5 mb-5 gap-3">
+        <header class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="navbar-brand" href="https://www.unibarranquilla.edu.co/" target="_blank">
+                        <img src="../../assets/logo-itsa.png" alt="Logo de la IUB" height="50">
+                    </a>
+                </div>
+                <nav class="col-md-6 navbar navbar-expand-md navbar-light justify-content-end">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="0Paciente.html" class="nav-link">Atrás</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="mt-4 d-flex flex-row gap-3">
+            <i class="bi bi-ui-radios" style="font-size: 1.5rem"></i>
+            <div class="text-center">
+                <h2>Formulario asistido por IA</h2>
+            </div>      
+        </div>
+      <div class="m-0 border-0">
+        <form class="needs-validation was-validated" novalidate="">
+          <div class="row p-3 align-items-center" style="background-color: #f5f0f7; border-radius: 16px">
+            <h4>Que tan frecuente...</h4>
+            <br />
+            <div class="form-group col-md-6">
+              <label for="tristeza">¿Qué tan frecuente te sientes triste?</label>
+              <select class="form-control" id="tristeza">
+                <option value="" disabled selected="">Que tan frecuente</option>
+                <option value="Most-often">La mayoría de las veces</option>
+                <option value="Usually">Por lo general</option>
+                <option value="Sometimes">A veces</option>
+                <option value="Seldom">Rara vez</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="euforia">¿Qué tan frecuente te sientes eufórico?</label>
+              <select class="form-control" id="euforia">
+                <option value="" disabled selected>Que tan frecuente</option>
+                <option value="Most-often">La mayoría de las veces</option>
+                <option value="Usually">Por lo general</option>
+                <option value="Sometimes">A veces</option>
+                <option value="Seldom">Rara vez</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="agotamiento"
+                >¿Qué tan frecuente te sientes agotado?</label
+              >
+              <select class="form-control" id="agotamiento">
+                <option value="" disabled selected>Que tan frecuente</option>
+                <option value="Most-often">La mayoría de las veces</option>
+                <option value="Usually">Por lo general</option>
+                <option value="Sometimes">A veces</option>
+                <option value="Seldom">Rara vez</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="insomnio"
+                >¿Qué tan frecuente no puedes conciliar el sueño?</label
+              >
+              <select class="form-control" id="insomnio">
+                <option value="" disabled selected>Que tan frecuente</option>
+                <option value="Most-often">La mayoría de las veces</option>
+                <option value="Usually">Por lo general</option>
+                <option value="Sometimes">A veces</option>
+                <option value="Seldom">Rara vez</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="row p-3 align-items-center mt-4 mb-4"
+            style="background-color: #f5f0f7; border-radius: 16px"
+          >
+            <h4>En un rango de 1 al 10</h4>
+            <br />
+            <div class="form-group col-md-6">
+              <label for="actividad_sexual"
+                >¿Qué tan activo sexualmente eres?</label
+              >
+              <select class="form-control" id="actividad_sexual">
+                <option value="" disabled selected>Del 1 al 10</option>
+                <option value="1 From 10">1 de 10</option>
+                <option value="2 From 10">2 de 10</option>
+                <option value="3 From 10">3 de 10</option>
+                <option value="4 From 10">4 de 10</option>
+                <option value="5 From 10">5 de 10</option>
+                <option value="6 From 10">6 de 10</option>
+                <option value="7 From 10">7 de 10</option>
+                <option value="8 From 10">8 de 10</option>
+                <option value="9 From 10">9 de 10</option>
+                <option value="10 From 10">10 de 10</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="concentracion">¿Qué tan concentrado te sientes?</label>
+              <select class="form-control" id="concentracion">
+                <option value="" disabled selected>Del 1 al 10</option>
+                <option value="1 From 10">1 de 10</option>
+                <option value="2 From 10">2 de 10</option>
+                <option value="3 From 10">3 de 10</option>
+                <option value="4 From 10">4 de 10</option>
+                <option value="5 From 10">5 de 10</option>
+                <option value="6 From 10">6 de 10</option>
+                <option value="7 From 10">7 de 10</option>
+                <option value="8 From 10">8 de 10</option>
+                <option value="9 From 10">9 de 10</option>
+                <option value="10 From 10">10 de 10</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="optimismo">¿Qué tan optimista eres?</label>
+              <select class="form-control" id="optimismo">
+                <option value="1 From 10">1 de 10</option>
+                <option value="2 From 10">2 de 10</option>
+                <option value="3 From 10">3 de 10</option>
+                <option value="4 From 10">4 de 10</option>
+                <option value="5 From 10">5 de 10</option>
+                <option value="6 From 10">6 de 10</option>
+                <option value="7 From 10">7 de 10</option>
+                <option value="8 From 10">8 de 10</option>
+                <option value="9 From 10">9 de 10</option>
+                <option value="10 From 10">10 de 10</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="row p-3 align-items-center mt-4 mb-4"
+            style="background-color: #f5f0f7; border-radius: 16px"
+          >
+            <h4>Responde si o no</h4>
+            <br />
+            <div class="form-group col-md-6">
+              <label for="cambio_humor">¿Cambias de humor de la nada?</label>
+              <select class="form-control" id="cambio_humor">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="pensamientos_suicidas"
+                >¿Haz pensado en quitarte la vida?</label
+              >
+              <select class="form-control" id="pensamientos_suicidas">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="anorexia"
+                >¿NO comes bien por tratar de verte mas delgado(a)
+                (anorexia)?</label
+              >
+              <select class="form-control" id="anorexia">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="respeto_autoridad"
+                >¿Respetas siempre a la figura de autoridad dependiendo el
+                contexto?</label
+              >
+              <select class="form-control" id="respeto_autoridad">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="intentado_explicar"
+                >¿Haz intentado explicar cómo te sientes?</label
+              >
+              <select class="form-control" id="intentado_explicar">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="respuesta_agresiva"
+                >¿Respondes agresivamente ante cualquier problema?</label
+              >
+              <select class="form-control" id="respuesta_agresiva">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ignorar_problemas"
+                >¿Ignoras los problemas y sigues adelante?</label
+              >
+              <select class="form-control" id="ignorar_problemas">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="colapso_emocional"
+                >¿Haz presentado crisis emocionales o colapsos mentales?</label
+              >
+              <select class="form-control" id="colapso_emocional">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="admitir_errores"
+                >¿Normalmente admites tus errores?</label
+              >
+              <select class="form-control" id="admitir_errores">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="sobreanalizar"
+                >¿Sobreanalizas o piensas demasiado las cosas?</label
+              >
+              <select class="form-control" id="sobreanalizar">
+                <option value="" disabled selected>Si o no</option>
+                <option value="YES">Si</option>
+                <option value="NO">No</option>
+              </select>
+            </div>
+          </div>
+          <div style="display: flex; align-self: center;justify-content: center;" class="d-grid"><button style="width: 200px;" type="submit" class="btn btn-success btn-md">Enviar</button></div>        
+        </form>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+</body>
+</html>

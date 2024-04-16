@@ -1,0 +1,22 @@
+/* Estilos para las secciones de eventos, consejos y anuncios */
+.evento-section, .consejo-section, .anuncio-section {
+    margin-bottom: 20px; /* Espacio entre secciones */
+}
+
+.banner-image {
+    width: 100%; /* Ajustar imagen al ancho de su contenedor */
+    margin-bottom: 10px; /* Espacio entre la imagen y los elementos de la sección */
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap; /* Los elementos de la fila no se envolverán a la siguiente línea */
+    overflow-x: auto; /* Agrega un scrollbar horizontal si hay demasiados elementos en la fila */
+    overflow-y: hidden; /* Oculta el scrollbar vertical */
+}
+
+.col {
+    flex: 0 0 auto; /* Las columnas no crecerán, pero tampoco se encogerán */
+    width: 200px; /* Ancho inicial de las columnas */
+    margin-right: 10px; /* Espacio entre columnas */
+}
