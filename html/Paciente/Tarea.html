@@ -51,5 +51,50 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../js/Paciente/tareapaciente.js"></script>
+    <script>
+        // Cargar tareas desde el almacenamiento local al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarTareas();
+        });
+
+        // Función para cargar las tareas desde el almacenamiento local
+        function cargarTareas() {
+            let tareasCompletadas = JSON.parse(localStorage.getItem('tareasCompletadas')) || [];
+            let tareasPendientes = JSON.parse(localStorage.getItem('tareasPendientes')) || [];
+
+            mostrarTareas(tareasCompletadas, 'tareascompletadas');
+            mostrarTareas(tareasPendientes, 'tareaspendientes');
+        }
+
+        // Función para mostrar las tareas en la interfaz de usuario
+        function mostrarTareas(tareas, idElemento) {
+            const listaTareas = document.getElementById(idElemento);
+            listaTareas.innerHTML = '';
+
+            tareas.forEach(function(tarea) {
+                const li = document.createElement('li');
+                li.textContent = tarea.descripcion;
+                li.className = 'list-group-item';
+                listaTareas.appendChild(li);
+            });
+        }
+
+        // Ejemplo de función para marcar una tarea como completada
+        function marcarComoCompletada(descripcionTarea) {
+            let tareasPendientes = JSON.parse(localStorage.getItem('tareasPendientes')) || [];
+
+            tareasPendientes = tareasPendientes.filter(tarea => tarea.descripcion !== descripcionTarea);
+
+            let tareasCompletadas = JSON.parse(localStorage.getItem('tareasCompletadas')) || [];
+
+            tareasCompletadas.push({ descripcion: descripcionTarea });
+
+            localStorage.setItem('tareasPendientes', JSON.stringify(tareasPendientes));
+            localStorage.setItem('tareasCompletadas', JSON.stringify(tareasCompletadas));
+
+            // Mostrar las tareas actualizadas en la interfaz de usuario
+            cargarTareas();
+        }
+    </script>
 </body>
 </html>
