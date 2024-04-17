@@ -424,36 +424,31 @@ def allpaciente():
     return jsonify(pacientes_dict)
 
 ########################################################## ASIGNAR TAREA ######################################
-
 @app.route('/registrar_tarea', methods=['POST'])
 def registrar_tarea():
     try:
         if request.method == 'POST':
-            # Obtener el correo electrónico del psicólogo desde el cuerpo de la solicitud JSON
             correo_psico = request.json.get('psicologo_id')
             
-            # Consultar el ID del psicólogo basado en su correo electrónico
+           
             cur = mysql.connection.cursor()
             cur.execute("SELECT id_psicologo FROM psicologo WHERE correo_institucional = %s", [correo_psico])
             result = cur.fetchone()
             
-            # Verificar si se encontró el psicólogo
+          
             if result is not None:
                 psicologo_id = result[0]
                 
-                # Obtener los demás datos de la tarea desde el cuerpo de la solicitud JSON
                 tarea = request.json
                 paciente_id = tarea.get('paciente_id')
                 titulo = tarea.get('titulo')
                 descripcion = tarea.get('descripcion')
                 
-                # Insertar la tarea en la base de datos
                 cur.execute("INSERT INTO tarea (id_psicologo, id_paciente, titulo, descripcion) VALUES (%s, %s, %s, %s)", 
                             (psicologo_id, paciente_id, titulo, descripcion))
                 mysql.connection.commit()
                 cur.close()
-                
-                # Retornar una respuesta exitosa
+
                 return jsonify({"mensaje": "Tarea registrada exitosamente"})
             else:
                 return jsonify({"error": "No se encontró ningún psicólogo con el correo electrónico proporcionado"})
@@ -462,6 +457,51 @@ def registrar_tarea():
     except Exception as e:
         print(e)
         return jsonify({"error": "Ocurrió un error al procesar la solicitud"})
+
+# Ruta para obtener todas las tareas
+@app.route('/mistareas', methods=['GET'])
+def mistareas():
+    try:
+        if request.method == 'GET':
+            # Obtener el correo electrónico del usuario desde la solicitud GET
+            correo_usuario = request.args.get('usuario')
+
+            # Consultar el ID del usuario basado en su correo electrónico
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT id_paciente FROM paciente WHERE correo_institucional = %s", (correo_usuario,))
+            result = cur.fetchone()
+            cur.close()
+
+            # Verificar si se encontró el usuario
+            if result is not None:
+                usuario_id = result[0]
+
+                # Consultar las tareas asignadas al usuario y el nombre del psicólogo asignado
+                cur = mysql.connection.cursor()
+                cur.execute("SELECT t.titulo, t.descripcion, p.nombre FROM tarea t INNER JOIN psicologo p ON t.id_psicologo = p.id_psicologo WHERE t.id_paciente = %s", (usuario_id,))
+                tareas_asignadas = cur.fetchall()
+                cur.close()
+
+                # Formatear las tareas como un JSON y devolverlas
+                tareas_json = []
+                for tarea in tareas_asignadas:
+                    tarea_dict = {
+                        'titulo': tarea[0],
+                        'descripcion': tarea[1],
+                        'nombre_psicologo': tarea[2]
+                    }
+                    tareas_json.append(tarea_dict)
+
+                return jsonify(tareas_json)
+            else:
+                return jsonify({"error": "No se encontró ningún usuario con el correo electrónico proporcionado"})
+        else:
+            return jsonify({"error": "Método no válido para esta ruta"})
+    except Exception as e:
+        print(e)
+        return jsonify({"información": str(e)})
+
+
 
     ########## MOSTRAR GRADO DE SALUD Y PDF (HISTORIAL CLINICO)##############################
 @app.route('/psico', methods=['GET'])
