@@ -502,6 +502,24 @@ def mistareas():
         return jsonify({"información": str(e)})
 
 
+@app.route('/marcar_como_completada', methods=['POST'])
+def marcar_como_completada():
+    if request.method == 'POST':
+        tarea_id = request.json['tarea_id']  # Suponiendo que obtienes el ID de la tarea del formulario
+        completada = True 
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute('UPDATE tarea SET completada = %s WHERE id_tarea = %s', (int(completada), tarea_id))
+            mysql.connection.commit()
+            cur.close()
+            return jsonify({"mensaje": "Tarea marcada como completada exitosamente"})
+        except Exception as e:
+            print(e)
+            return jsonify({"error": "Error al marcar la tarea como completada"})
+    else:
+        return jsonify({"error": "Método no válido para esta ruta"})
+
+
 
     ########## MOSTRAR GRADO DE SALUD Y PDF (HISTORIAL CLINICO)##############################
 @app.route('/psico', methods=['GET'])

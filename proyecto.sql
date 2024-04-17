@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2024 a las 00:56:01
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.0.28
+-- Tiempo de generación: 17-04-2024 a las 05:58:04
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,15 @@ CREATE TABLE `avance_personal` (
   `fecha_avance` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `avance_personal`
+--
+
+INSERT INTO `avance_personal` (`id_avance`, `correo_institucional`, `contenido`, `fecha_avance`) VALUES
+(1, 'paci', 'prueba1', '2024-04-09 23:40:18'),
+(4, 'paci', 'gk', '2024-04-10 23:13:56'),
+(5, 'paci', 'Hoy tuve un excelente dia, jugue futbol con mis amigos y vi una peli en la noche, despues jugue play y maneje bici durante la tarde, en la noche me visitaron otros amigos y jugamos en la terraza, fue un dia increible.', '2024-04-10 23:57:49');
+
 -- --------------------------------------------------------
 
 --
@@ -43,12 +52,19 @@ CREATE TABLE `avance_personal` (
 CREATE TABLE `cita` (
   `id_cita` int(11) NOT NULL,
   `id_psicologo` int(11) NOT NULL,
-  `id_paciente` int(11) DEFAULT NULL,
+  `id_paciente` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `sede` enum('soledad','barranquilla-paz') NOT NULL,
+  `sede` int(11) NOT NULL,
   `estado` enum('pendiente','confirmada','cancelada','finalizada') NOT NULL DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cita`
+--
+
+INSERT INTO `cita` (`id_cita`, `id_psicologo`, `id_paciente`, `fecha`, `hora`, `sede`, `estado`) VALUES
+(1, 1, 1, '2024-04-16', '09:53:28', 1, 'confirmada');
 
 -- --------------------------------------------------------
 
@@ -87,7 +103,10 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`id_paciente`, `nombre`, `correo_institucional`, `contraseña`, `tipo_documento`, `identificacion`, `telefono`, `grado_salud`, `historial_clinico`) VALUES
-(1, 'paci', 'paci', 'paci', 'CC', 321, NULL, NULL, NULL);
+(1, 'paci', 'paci', 'paci', 'CC', 321, NULL, NULL, NULL),
+(4, 'luis la bolivar', 'luisfbolivar@unibarranquilla.edu.co', '123456789Luis*', 'CC', 1044608567, NULL, NULL, NULL),
+(6, 'jonier orozco', 'jonier@unibarranquilla.edu.co', '1044619278Jo*', 'TI', 1044619278, NULL, NULL, NULL),
+(7, 'prueba', 'prueba@unibarranquilla.edu.co', '10445Jo*', 'TI', 2147483647, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -101,7 +120,7 @@ CREATE TABLE `psicologo` (
   `correo_institucional` varchar(50) NOT NULL,
   `contraseña` varchar(50) NOT NULL,
   `identificacion` int(13) NOT NULL,
-  `telefono` bigint(15) DEFAULT NULL
+  `telefono` int(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -109,12 +128,7 @@ CREATE TABLE `psicologo` (
 --
 
 INSERT INTO `psicologo` (`id_psicologo`, `nombre`, `correo_institucional`, `contraseña`, `identificacion`, `telefono`) VALUES
-(1, 'Diana Ramírez', 'diana.ramirez@unibarranquilla.edu.co', 'password123', 1122334455, 3016899959),
-(2, 'Juan Pérez', 'juan.perez@unibarranquilla.edu.co', 'securepass', 1988776655, 3006481091),
-(3, 'María González', 'maria.gonzalez@unibarranquilla.edu.co', 'pass1234', 1344556677, 3045986232),
-(4, 'Pedro Sánchez', 'pedro.sanchez@unibarranquilla.edu.co', '12345pass', 1566778899, 3008084520),
-(5, 'Laura Martínez', 'laura.martinez@unibarranquilla.edu.co', 'password12345', 1899001122, 3012759088),
-(6, 'psico', 'psico', 'psico', 123, 123);
+(1, 'psico', 'psico', 'psico', 123, 123);
 
 -- --------------------------------------------------------
 
@@ -134,6 +148,26 @@ CREATE TABLE `publicacion` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sede`
+--
+
+CREATE TABLE `sede` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `direccion` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `sede`
+--
+
+INSERT INTO `sede` (`id`, `nombre`, `direccion`) VALUES
+(1, 'Campus Barranquilla - Sede Plaza de la Paz', 'Carrera 45 No. 48-31'),
+(2, 'Soledad, Atlántico', 'Calle 18 No. 39-100');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tarea`
 --
 
@@ -143,9 +177,27 @@ CREATE TABLE `tarea` (
   `id_psicologo` int(11) NOT NULL,
   `titulo` varchar(25) NOT NULL,
   `descripcion` text NOT NULL,
-  `fecha_cierre` datetime NOT NULL,
-  `estado` enum('pendiente','en curso','finalizada','') NOT NULL
+  `completada` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarea`
+--
+
+INSERT INTO `tarea` (`id_tarea`, `id_paciente`, `id_psicologo`, `titulo`, `descripcion`, `completada`) VALUES
+(4, 1, 1, 'ada', 'asd', 0),
+(5, 4, 1, 'asd', 'asdsa', 0),
+(6, 6, 1, 'Traer papá', 'asda', 0),
+(7, 6, 1, 'ada', 'sadsa', 0),
+(8, 6, 1, 'ada', 'sadsa', 0),
+(9, 4, 1, 'asd', 'asd', 0),
+(10, 1, 1, 'asd', 'asd', 0),
+(11, 1, 1, 'asd', 'asd', 0),
+(12, 1, 1, 'ads', 'asd', 0),
+(13, 1, 1, 'ads', 'asd', 0),
+(14, 1, 1, 'asd', 'asd', 0),
+(16, 1, 1, 'prueba', 'a', 0),
+(17, 1, 1, 'prueba', 'a', 0);
 
 --
 -- Índices para tablas volcadas
@@ -164,7 +216,8 @@ ALTER TABLE `avance_personal`
 ALTER TABLE `cita`
   ADD PRIMARY KEY (`id_cita`),
   ADD KEY `id_psicologo` (`id_psicologo`),
-  ADD KEY `id_paciente` (`id_paciente`);
+  ADD KEY `id_paciente` (`id_paciente`),
+  ADD KEY `sede` (`sede`);
 
 --
 -- Indices de la tabla `historial_avance`
@@ -198,6 +251,12 @@ ALTER TABLE `publicacion`
   ADD KEY `id_psicologo` (`id_psicologo`);
 
 --
+-- Indices de la tabla `sede`
+--
+ALTER TABLE `sede`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tarea`
 --
 ALTER TABLE `tarea`
@@ -213,13 +272,13 @@ ALTER TABLE `tarea`
 -- AUTO_INCREMENT de la tabla `avance_personal`
 --
 ALTER TABLE `avance_personal`
-  MODIFY `id_avance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_avance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1024;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `historial_avance`
@@ -231,25 +290,31 @@ ALTER TABLE `historial_avance`
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `psicologo`
 --
 ALTER TABLE `psicologo`
-  MODIFY `id_psicologo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_psicologo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  MODIFY `id_publicacion` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_publicacion` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `sede`
+--
+ALTER TABLE `sede`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas
@@ -266,7 +331,8 @@ ALTER TABLE `avance_personal`
 --
 ALTER TABLE `cita`
   ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`id_psicologo`) REFERENCES `psicologo` (`id_psicologo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`id_psicologo`) REFERENCES `psicologo` (`id_psicologo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cita_ibfk_3` FOREIGN KEY (`sede`) REFERENCES `sede` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `historial_avance`
