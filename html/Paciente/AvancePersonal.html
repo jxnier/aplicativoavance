@@ -70,6 +70,23 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="avanceExitosoModal" tabindex="-1" aria-labelledby="avanceExitosoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="avanceExitosoModalLabel">¡Avance Subido con Éxito!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ¡Tu avance personal se ha subido con éxito!
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
     </main>
     <footer class="text-center mt-3 ">
         <p>&copy; 2024</p>
@@ -77,14 +94,48 @@
     <script src="../../js/Paciente/paciente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+        <script>
+            function registrarAvancePersonal() {
+                const contenido = document.getElementById('avance').value;
+                if (!contenido.trim()) {
+                    alert('Por favor ingrese contenido para el avance personal.');
+                    return;
+                }
+                if (!tu.correo_institucional) {
+                    alert('No se ha detectado un correo válido para el paciente. Por favor, inicie sesión nuevamente.');
+                    return;
+                }
+            
+                const avanceData = {
+                    contenido: contenido,
+                    correo_paciente: tu.correo_institucional 
+                };  
+            
+                axios.post('http://localhost:3000/registrar_avance_personal', avanceData)
+                .then(response => {
+                    console.log("Respuesta del servidor:", response);
+                    var avanceExitosoModal = new bootstrap.Modal(document.getElementById('avanceExitosoModal'));
+                    avanceExitosoModal.show();
+                    setTimeout(function() {
+                        avanceExitosoModal.hide();
+                    }, 2000); 
+                    document.getElementById('avance').value = '';
+                    obtenerAvancesPersonales(); 
+                })
+                .catch(error => {
+                    console.error('Error al registrar el avance personal:', error);
+                    alert('Error al registrar el avance personal.');
+                });
+            }
+            </script>
+            
 </body>
 </html>

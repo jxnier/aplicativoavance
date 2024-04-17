@@ -43,6 +43,7 @@ def registrar_paciente():
         return jsonify({"informacion":e})
 
 ########################################### Mostrar tabla 'paciente' en datatable ####################################################
+
 @app.route('/tabla', methods=['GET'])
 def tabla():
     try:
@@ -75,7 +76,6 @@ def inicar_sesion():
             correo_institucional = data['correo_institucional']
             contraseña = data['contraseña']
             rol = data['rol']
-
             if rol == "administrador":
                 if correo_institucional == "pablo" and contraseña == "pablo":
                     return jsonify({"mensaje": "Redireccionando", "link": "http://localhost/aplicativoavance/html/Administrador/0Administrador.html"})
@@ -87,8 +87,8 @@ def inicar_sesion():
                 siexiste = cursor.fetchone()
                 cursor.close()
                 if siexiste != None:
-                 nombre_usuario = siexiste[0]  
-                 return jsonify({"mensaje": "Redireccionando", "link": "http://localhost/aplicativoavance/html/Paciente/0Paciente.html", "nombre": nombre_usuario})
+                    nombre_usuario = siexiste[0]  
+                    return jsonify({"mensaje": "Redireccionando", "link": "http://localhost/aplicativoavance/html/Paciente/0Paciente.html", "nombre": nombre_usuario})
                 else:
                     return jsonify({"mensaje": "Paciente: Correo institucional o contraseña incorrecta"})
             elif rol == "psicologo":
@@ -97,8 +97,8 @@ def inicar_sesion():
                 siexiste = cursor.fetchone()
                 cursor.close()
                 if siexiste != None:
-                 nombre_usuario = siexiste[0]  
-                 return jsonify({"mensaje": "Redireccionando", "link": "http://localhost/aplicativoavance/html/Psicologo/0Psicologo.html", "nombre": nombre_usuario})
+                    nombre_usuario = siexiste[0]  
+                    return jsonify({"mensaje": "Redireccionando", "link": "http://localhost/aplicativoavance/html/Psicologo/0Psicologo.html", "nombre": nombre_usuario})
                 else:
                     return jsonify({"mensaje": "Psicólogo: Correo institucional o contraseña incorrecta"})
         else:
@@ -140,7 +140,6 @@ def registrar_avance_personal():
             cursor.execute('SELECT correo_institucional FROM paciente WHERE correo_institucional = %s', (correo_paciente,))
             correo_institucional = cursor.fetchone()
             cursor.close()
-
             if correo_institucional:
                 correo_institucional = correo_institucional[0]
                 cur = mysql.connection.cursor()
@@ -166,7 +165,6 @@ def obtener_avances():
         cur.execute("SELECT contenido, fecha_avance, id_avance FROM avance_personal WHERE correo_institucional = %s", (correo_usuario,))
         avances = cur.fetchall()
         cur.close()
-
         # Convertir la lista de tuplas a una lista de diccionarios
         avances_list = []
         for avance in avances:
@@ -199,7 +197,7 @@ def eliminar_avance():
         print(e)
         return jsonify({"error": "Ocurrió un error al procesar la solicitud"})
 
-#################################################### Publicar eventos o consejos ######################################################
+#################################################### Publicar eventos, consejos y anuncios ######################################################
 
 @app.route('/Publicar', methods=['POST'])
 def Publicar():
@@ -233,7 +231,6 @@ def obtener_perfil():
             cur.execute("SELECT nombre, tipo_documento, identificacion, correo_institucional FROM paciente WHERE correo_institucional = %s", (correo_usuario,))
             perfil_usuario = cur.fetchone()
             cur.close()
-
             if perfil_usuario:
                 perfil_dict = {
                     'nombre': perfil_usuario[0],
@@ -250,6 +247,7 @@ def obtener_perfil():
         return jsonify({'error': str(e)})
 
 ##################################################### Mostrar Publicaciones ##########################################################
+
 @app.route('/publicaciones', methods=['GET'])
 def obtener_publicaciones():
     try:
@@ -269,7 +267,6 @@ def obtener_publicaciones():
                     'fecha': publicacion[4]
                 }
                 publicaciones_list.append(publicacion_dict)
-
             return jsonify(publicaciones_list)
         else:
             return jsonify({"error": "Método no válido para esta ruta"})
@@ -279,6 +276,7 @@ def obtener_publicaciones():
 
 
 ##################################################### EVENTOS  ################################################################
+
 @app.route('/obtener_eventos', methods=['GET'])
 def obtener_eventos():
     try:
@@ -296,39 +294,37 @@ def obtener_eventos():
                     'fecha': eventos[3]
                 }
                 eventos_list.append(eventos_dict)
-
             return jsonify(eventos_list)
-
     except Exception as e:
         print("Error al obtener los eventos:", e)
         return jsonify([])  
 
 ##################################################### CONSEJOS  ################################################################
+
 @app.route('/obtener_consejos', methods=['GET'])
 def obtener_consejos():
     try:
         with mysql.connection.cursor() as cursor:
             sql = "SELECT p.nombre, pu.titulo, pu.contenido, pu.fecha_publicacion FROM publicacion pu INNER JOIN psicologo p ON pu.id_psicologo = p.id_psicologo and pu.tipo = 'consejo' "
             cursor.execute(sql)
-            eventos = cursor.fetchall()
+            consejos = cursor.fetchall()
             
-            eventos_list = []
-            for eventos in eventos:
-                eventos_dict = {
-                    'nombre': eventos[0],
-                    "titulo": eventos[1],
-                    'contenido': eventos[2],
-                    'fecha': eventos[3]
+            consejos_list = []
+            for consejos in consejos:
+                consejos_dict = {
+                    'nombre': consejos[0],
+                    "titulo": consejos[1],
+                    'contenido': consejos[2],
+                    'fecha': consejos[3]
                 }
-                eventos_list.append(eventos_dict)
-
-            return jsonify(eventos_list)
-
+                consejos_list.append(consejos_dict)
+            return jsonify(consejos_list)
     except Exception as e:
-        print("Error al obtener los eventos:", e)
+        print("Error al obtener los consejos:", e)
         return jsonify([])  
 
 ##################################################### ANUNCIO  ################################################################
+
 @app.route('/obtener_anuncios', methods=['GET'])
 def obtener_anuncios():
     try:
@@ -351,42 +347,6 @@ def obtener_anuncios():
         print("Error al obtener los anuncios:", e)
         return jsonify([])  
 
-import os
-
-# Configura la carpeta donde se guardarán los archivos subidos
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')  # Obtén la ruta completa al directorio "uploads"
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)  # Crea el directorio si no existe
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-#####subir historial en pdf##############
-@app.route('/subir_historial', methods=['POST'])
-def subir_historial():
-    try:
-        if 'pdf' not in request.files:
-            return 'No se encontró el archivo'
-        archivo = request.files['pdf']
-
-        if archivo.filename == '':
-            return 'No se seleccionó ningún archivo'
-        if archivo.mimetype != 'application/pdf':
-            return 'El archivo debe ser un PDF'
-
-        filename = secure_filename(archivo.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        archivo.save(filepath)
-
-        id_paciente = request.form['id_paciente']  
-        cur = mysql.connection.cursor()
-        cur.execute("UPDATE paciente SET historial_clinico = %s WHERE id_paciente = %s", (filepath, id_paciente))
-        mysql.connection.commit()
-        cur.close()
-
-        return 'Historial clínico subido exitosamente'
-    except Exception as e:
-        print(e)
-        return jsonify({'error': str(e)})
-
 ########################################################### GROUP BY #####################################################
 
 @app.route('/grafica_tipo_documento', methods=['GET'])
@@ -396,13 +356,11 @@ def grafica_tipo_documento():
         cursor.execute("SELECT tipo_documento, COUNT(*) AS count FROM paciente GROUP BY tipo_documento")
         data = cursor.fetchall()
         cursor.close()
-
         labels = []
         values = []
         for row in data:
             labels.append(row[0])
             values.append(row[1])
-
         return jsonify({
             'labels': labels,
             'values': values
@@ -427,13 +385,10 @@ def registrar_tarea():
     try:
         if request.method == 'POST':
             correo_psico = request.json.get('psicologo_id')
-            
-           
             cur = mysql.connection.cursor()
             cur.execute("SELECT id_psicologo FROM psicologo WHERE correo_institucional = %s", [correo_psico])
             result = cur.fetchone()
             
-          
             if result is not None:
                 psicologo_id = result[0]
                 
@@ -446,7 +401,6 @@ def registrar_tarea():
                             (psicologo_id, paciente_id, titulo, descripcion))
                 mysql.connection.commit()
                 cur.close()
-
                 return jsonify({"mensaje": "Tarea registrada exitosamente"})
             else:
                 return jsonify({"error": "No se encontró ningún psicólogo con el correo electrónico proporcionado"})
@@ -456,30 +410,27 @@ def registrar_tarea():
         print(e)
         return jsonify({"error": "Ocurrió un error al procesar la solicitud"})
 
-# Ruta para obtener todas las tareas
+######################################## Ruta para obtener todas las tareas #############################################
+
 @app.route('/mistareas', methods=['GET'])
 def mistareas():
     try:
         if request.method == 'GET':
             # Obtener el correo electrónico del usuario desde la solicitud GET
             correo_usuario = request.args.get('usuario')
-
             # Consultar el ID del usuario basado en su correo electrónico
             cur = mysql.connection.cursor()
             cur.execute("SELECT id_paciente FROM paciente WHERE correo_institucional = %s", (correo_usuario,))
             result = cur.fetchone()
             cur.close()
-
             # Verificar si se encontró el usuario
             if result is not None:
                 usuario_id = result[0]
-
                 # Consultar las tareas asignadas al usuario y el nombre del psicólogo asignado
                 cur = mysql.connection.cursor()
                 cur.execute("SELECT t.titulo, t.descripcion, p.nombre, t.id_tarea FROM tarea t INNER JOIN psicologo p ON t.id_psicologo = p.id_psicologo WHERE t.id_paciente = %s", (usuario_id,))
                 tareas_asignadas = cur.fetchall()
                 cur.close()
-
                 # Formatear las tareas como un JSON y devolverlas
                 tareas_json = []
                 for tarea in tareas_asignadas:
@@ -490,7 +441,6 @@ def mistareas():
                         'id': tarea[3]
                     }
                     tareas_json.append(tarea_dict)
-
                 return jsonify(tareas_json)
             else:
                 return jsonify({"error": "No se encontró ningún usuario con el correo electrónico proporcionado"})
@@ -500,6 +450,7 @@ def mistareas():
         print(e)
         return jsonify({"información": str(e)})
 
+############################## MARCAR TAREAS COMO COMPLETADAS ##############################
 
 @app.route('/marcar_como_completada', methods=['POST'])
 def marcar_como_completada():
@@ -518,9 +469,8 @@ def marcar_como_completada():
     else:
         return jsonify({"error": "Método no válido para esta ruta"})
 
+############################## MOSTRAR GRADO DE SALUD Y PDF (HISTORIAL CLINICO)##############################
 
-
-    ########## MOSTRAR GRADO DE SALUD Y PDF (HISTORIAL CLINICO)##############################
 @app.route('/psico', methods=['GET'])
 def psico():
     try:
@@ -542,6 +492,39 @@ def psico():
         print(e)
         return jsonify({"información":e})
 
+########################################### MOSTRAR CITAS DISPONIBLES POR FECHA ##################################################
+
+@app.route('/buscar-citas', methods=['GET'])
+def buscar_citas():
+    try:
+        if request.method == 'GET':
+            fecha = request.args.get('fecha')  # Acceder al parámetro de la URL
+            cursor = mysql.cursor()
+            cursor.execute('''
+                SELECT p.nombre, c.fecha, c.hora, c.sede
+                FROM cita c
+                INNER JOIN psicologo p ON c.id_psicologo = p.id_psicologo
+                WHERE c.fecha = %s
+            ''', (fecha,))
+            citas = cursor.fetchall()
+            cursor.close()
+            citas_dict = []
+            for cita in citas:
+                cita_dict = {
+                    'nombre_psicologo': cita[0],
+                    'fecha': cita[1],
+                    'hora': cita[2],
+                    'sede': cita[3]
+                }
+                citas_dict.append(cita_dict)
+            print("si se envia")
+            return jsonify(citas_dict)
+        else:
+            return jsonify({"error": "Método no válido para esta ruta"})
+    except Exception as e:
+        # Manejo del error
+        print("no se envia")
+        return jsonify({'error': str(e)})
 
 ########################################################### Predecir paciente ####################################################
 @app.route('/prediccion', methods=['POST'])
