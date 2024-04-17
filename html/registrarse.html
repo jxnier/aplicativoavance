@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicia Sesión</title>
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <link rel="shortcut icon" href="../assets/logo iub.png" type="image/x-icon">
 </head>
 <body>
@@ -38,7 +39,7 @@
                                 <input type="password" minlength="4" class="input-field" id="contraseña" autocomplete="off" required>
                                 <label>Contraseña</label>
                             </div>
-                            <input type="button" value="Ingresar" class="sign-btn" id="login">
+                            <input type="button" value="Ingresar" class="sign-btn" id="login" onclick="mostrarModal()">
                         </div>
                     </form>
                     <form autocomplete="off" class="sign-up-form" id="register-form">
@@ -91,9 +92,34 @@
                 </div>
             </div>
         </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Bienvenido al aplicativo</h2>
+        <p>¡Gracias por iniciar sesión! Esperamos que disfrutes de todas las funciones que ofrecemos.</p>
+        </div>
+    </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/IniciaSesion/IniciaSesionEfectos.js"></script>
     <script src="../js/IniciaSesion/IniciarSesionFunciones.js"></script>
+    <script>
+        function mostrarModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+    
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+    
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
+    
 </body>
 </html>
