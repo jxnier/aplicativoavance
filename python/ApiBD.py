@@ -478,7 +478,7 @@ def mistareas():
 
                 # Consultar las tareas asignadas al usuario y el nombre del psicólogo asignado
                 cur = mysql.connection.cursor()
-                cur.execute("SELECT t.titulo, t.descripcion, p.nombre FROM tarea t INNER JOIN psicologo p ON t.id_psicologo = p.id_psicologo WHERE t.id_paciente = %s", (usuario_id,))
+                cur.execute("SELECT t.titulo, t.descripcion, p.nombre, t.id_tarea FROM tarea t INNER JOIN psicologo p ON t.id_psicologo = p.id_psicologo WHERE t.id_paciente = %s", (usuario_id,))
                 tareas_asignadas = cur.fetchall()
                 cur.close()
 
@@ -488,7 +488,8 @@ def mistareas():
                     tarea_dict = {
                         'titulo': tarea[0],
                         'descripcion': tarea[1],
-                        'nombre_psicologo': tarea[2]
+                        'nombre_psicologo': tarea[2],
+                        'id': tarea[3]
                     }
                     tareas_json.append(tarea_dict)
 
