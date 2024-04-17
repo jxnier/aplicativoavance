@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2024 a las 18:25:28
+-- Tiempo de generación: 17-04-2024 a las 19:09:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -109,7 +109,7 @@ CREATE TABLE `paciente` (
 --
 
 INSERT INTO `paciente` (`id_paciente`, `nombre`, `correo_institucional`, `contraseña`, `tipo_documento`, `identificacion`, `telefono`, `prediccion_ia`, `historial_clinico`) VALUES
-(1, 'paci', 'paci', 'paci', 'CC', 321, NULL, NULL, NULL);
+(1, 'paci', 'paci', 'paci', 'CC', 321, NULL, 'Bipolar Type-2', NULL);
 
 -- --------------------------------------------------------
 
