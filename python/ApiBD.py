@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, redirect, send_file, url_for, render_
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
+import mysql.connector
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
@@ -574,6 +575,22 @@ def prediccion():
     }
 
     return jsonify({'predicted_disorder': diagnose_mapping[predicted_disorder_label]})
+
+@app.route('/actualizar_prediccion', methods=['POST'])
+def actualizar_prediccion():
+    data = request.json
+
+    # Extraer el correo del paciente y la predicción de los datos enviados
+    correo_paciente = data.get('correo_paciente')
+    prediccion_ia = data.get('prediccion_ia')
+
+    # Actualizar la predicción en la base de datos
+    update_query = "UPDATE paciente SET prediccion_ia = %s WHERE correo_institucional = %s"
+    cursor = mysql.connection.cursor()
+    cursor.execute(update_query, (prediccion_ia, correo_paciente))
+    mysql.connection.commit()  
+    return jsonify({'mensaje': 'Predicción actualizada correctamente'}), 200
+
 
 if __name__=="__main__":
     app.run(port=3000,debug=True)

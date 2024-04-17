@@ -104,6 +104,79 @@ function eliminarAvance(idAvance) {
     }
 }
 
+function sendFormData() {
+    // Capturar los valores de los campos del formulario
+    var sadness = document.getElementById("Sadness").value;
+    var exhausted = document.getElementById("Euphoric").value;
+    var agotamiento = document.getElementById('agotamiento').value;
+    var insomnio = document.getElementById('insomnio').value;
+    var actividad_sexual = document.getElementById('actividad_sexual').value;
+    var concentracion = document.getElementById('concentracion').value;
+    var optimismo = document.getElementById('optimismo').value;
+    var cambio_humor = document.getElementById('cambio_humor').value;
+    var pensamientos_suicidas = document.getElementById('pensamientos_suicidas').value;
+    var anorexia = document.getElementById('anorexia').value;
+    var respeto_autoridad = document.getElementById('respeto_autoridad').value;
+    var intentado_explicar = document.getElementById('intentado_explicar').value;
+    var respuesta_agresiva = document.getElementById('respuesta_agresiva').value;
+    var ignorar_problemas = document.getElementById('ignorar_problemas').value;
+    var colapso_emocional = document.getElementById('colapso_emocional').value;
+    var admitir_errores = document.getElementById('admitir_errores').value;
+    var sobreanalizar = document.getElementById('sobreanalizar').value;
+  
+    // Obtener el correo del paciente desde la variable `tu`
+    const correoUsuario = tu.correo_institucional;
+  
+    // Crear un objeto con los valores capturados, incluyendo el correo del paciente
+    var formData = {
+      "Sadness": sadness,
+      "Euphoric": agotamiento,
+      "Exhausted": exhausted,
+      "Sleep dissorder": insomnio,
+      "Mood Swing": cambio_humor,
+      "Suicidal thoughts":pensamientos_suicidas,
+      "Anorxia": anorexia,
+      "Authority Respect": respeto_autoridad,
+      "Try-Explanation": intentado_explicar,
+      "Aggressive Response": respuesta_agresiva,
+      "Ignore & Move-On": ignorar_problemas,
+      "Nervous Break-down": colapso_emocional,
+      "Admit Mistakes": admitir_errores,
+      "Overthinking": sobreanalizar,
+      "Sexual Activity": actividad_sexual,
+      "Concentration": concentracion,
+      "Optimisim": optimismo,
+    };
+  
+    // Enviar los datos al servidor utilizando Axios
+    axios.post('http://localhost:3000/prediccion', formData)
+    .then(function (response) {
+      console.log(response.data.predicted_disorder);
+      actualizarPrediccion(response.data.predicted_disorder); // Aquí se llama a actualizarPrediccion()
+      alert("Sus resultados han sido enviado con exito a los psicologos!!");
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  function actualizarPrediccion(prediccion) {
+    const correoPaciente = tu.correo_institucional; 
+    const data = {
+        correo_paciente: correoPaciente,
+        prediccion_ia: prediccion
+    };
+    
+    axios.post('http://localhost:3000/actualizar_prediccion', data)
+        .then(response => {
+            console.log(response.data.mensaje);
+        })
+        .catch(error => {
+            console.error('Error al actualizar la predicción:', error);
+        });
+    
+}
+
 
 window.onload = function() {
     obtenerAvancesPersonales();

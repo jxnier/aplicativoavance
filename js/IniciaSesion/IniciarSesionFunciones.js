@@ -81,7 +81,6 @@ const login = () => {
                     } else {
                         const url = response.data.link;
                         window.location.replace(url);
-                        alert("¡Bienvenido(a)!");
                         const tu = {
                             rol: rol,
                             correo_institucional: correo_institucional,
