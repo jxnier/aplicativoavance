@@ -109,12 +109,12 @@ CREATE TABLE `psicologo` (
 --
 
 INSERT INTO `psicologo` (`id_psicologo`, `nombre`, `correo_institucional`, `contraseña`, `identificacion`, `telefono`) VALUES
-(1, 'psico', 'psico', 'psico', 123, 123);
+(1, 'psico', 'psico', 'psico', 123, 123),
 (2, 'Diana Ramírez', 'diana.ramirez@unibarranquilla.edu.co', 'password123', 1122334455, 3016899959),
 (3, 'Juan Pérez', 'juan.perez@unibarranquilla.edu.co', 'securepass', 1988776655, 3006481091),
 (4, 'María González', 'maria.gonzalez@unibarranquilla.edu.co', 'pass1234', 1344556677, 3045986232),
 (5, 'Pedro Sánchez', 'pedro.sanchez@unibarranquilla.edu.co', '12345pass', 1566778899, 3008084520),
-(6, 'Laura Martínez', 'laura.martinez@unibarranquilla.edu.co', 'password12345', 1899001122, 3012759088),
+(6, 'Laura Martínez', 'laura.martinez@unibarranquilla.edu.co', 'password12345', 1899001122, 3012759088);
 
 -- --------------------------------------------------------
 
