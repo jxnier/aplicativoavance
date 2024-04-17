@@ -34,15 +34,6 @@ CREATE TABLE `avance_personal` (
   `fecha_avance` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `avance_personal`
---
-
-INSERT INTO `avance_personal` (`id_avance`, `correo_institucional`, `contenido`, `fecha_avance`) VALUES
-(1, 'paci', 'prueba1', '2024-04-09 23:40:18'),
-(4, 'paci', 'gk', '2024-04-10 23:13:56'),
-(5, 'paci', 'Hoy tuve un excelente dia, jugue futbol con mis amigos y vi una peli en la noche, despues jugue play y maneje bici durante la tarde, en la noche me visitaron otros amigos y jugamos en la terraza, fue un dia increible.', '2024-04-10 23:57:49');
-
 -- --------------------------------------------------------
 
 --
@@ -58,13 +49,6 @@ CREATE TABLE `cita` (
   `sede` enum('soledad','barranquilla-paz') NOT NULL,
   `estado` enum('pendiente','confirmada','cancelada','finalizada') NOT NULL DEFAULT 'pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `cita`
---
-
-INSERT INTO `cita` (`id_cita`, `id_psicologo`, `id_paciente`, `fecha`, `hora`, `sede`, `estado`) VALUES
-(1, 1, 1, '2024-04-16', '09:53:28', 1, 'confirmada');
 
 -- --------------------------------------------------------
 
@@ -125,12 +109,12 @@ CREATE TABLE `psicologo` (
 --
 
 INSERT INTO `psicologo` (`id_psicologo`, `nombre`, `correo_institucional`, `contraseña`, `identificacion`, `telefono`) VALUES
-(1, 'Diana Ramírez', 'diana.ramirez@unibarranquilla.edu.co', 'password123', 1122334455, 3016899959),
-(2, 'Juan Pérez', 'juan.perez@unibarranquilla.edu.co', 'securepass', 1988776655, 3006481091),
-(3, 'María González', 'maria.gonzalez@unibarranquilla.edu.co', 'pass1234', 1344556677, 3045986232),
-(4, 'Pedro Sánchez', 'pedro.sanchez@unibarranquilla.edu.co', '12345pass', 1566778899, 3008084520),
-(5, 'Laura Martínez', 'laura.martinez@unibarranquilla.edu.co', 'password12345', 1899001122, 3012759088),
-(6, 'psico', 'psico', 'psico', 123, 123);
+(1, 'psico', 'psico', 'psico', 123, 123);
+(2, 'Diana Ramírez', 'diana.ramirez@unibarranquilla.edu.co', 'password123', 1122334455, 3016899959),
+(3, 'Juan Pérez', 'juan.perez@unibarranquilla.edu.co', 'securepass', 1988776655, 3006481091),
+(4, 'María González', 'maria.gonzalez@unibarranquilla.edu.co', 'pass1234', 1344556677, 3045986232),
+(5, 'Pedro Sánchez', 'pedro.sanchez@unibarranquilla.edu.co', '12345pass', 1566778899, 3008084520),
+(6, 'Laura Martínez', 'laura.martinez@unibarranquilla.edu.co', 'password12345', 1899001122, 3012759088),
 
 -- --------------------------------------------------------
 
