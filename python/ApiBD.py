@@ -2,15 +2,13 @@ from flask import Flask, request, jsonify, redirect, send_file, url_for, render_
 from flask_mysqldb import MySQL
 from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
+import numpy as np
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
 
-#############################################################################################################################
-# import numpy as np
-# import pandas as pd
-# from sklearn.preprocessing import LabelEncoder
-# from sklearn.naive_bayes import GaussianNB
-# from sklearn.metrics import accuracy_score
-# from sklearn.model_selection import train_test_split
-#############################################################################################################################
 
 app = Flask(__name__)
 CORS(app)
@@ -529,67 +527,69 @@ def buscar_citas():
         return jsonify({'error': str(e)})
 
 ########################################################### Predecir paciente ####################################################
+@app.route('/prediccion', methods=['POST'])
+def prediccion():
+    try:
+        ruta_archivo = ("C:/xampp/htdocs/aplicativoavance/python/Dataset-Mental-Disorders.csv")
+        df = pd.read_csv(ruta_archivo)
+        df = df.drop(columns=['Patient Number'])
+        labelencoder = LabelEncoder()
+        for column in df.columns:
+            df[column] = labelencoder.fit_transform(df[column])
+        X = df.drop('Expert Diagnose', axis=1)
+        y = df['Expert Diagnose']
+        y = labelencoder.fit_transform(y)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+        naive_bayes = GaussianNB()
+        naive_bayes.fit(X_train, y_train)
+        y_pred = naive_bayes.predict(X_test)
+        accuracy = accuracy_score(y_test, y_pred)
+        print("Precisión del modelo de Naive Bayes:", accuracy)
 
-# @app.route('/prediccion', methods=['POST'])
-# def prediccion():
-#     try:
-#             ### RECIBO JSON
-#         ####################################################       
-#         ruta_archivo = ('Dataset-Mental-Disorders.csv')
-#         df = pd.read_csv(ruta_archivo)
-#         df = df.drop(columns=['Patient Number'])
-#         labelencoder = LabelEncoder()
-#         for column in df.columns:
-#             df[column] = labelencoder.fit_transform(df[column])
-#         X = df.drop('Expert Diagnose', axis=1)
-#         y = df['Expert Diagnose']
-#         y = labelencoder.fit_transform(y)
-#         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
-#         naive_bayes = GaussianNB()
-#         naive_bayes.fit(X_train, y_train)
-#         y_pred = naive_bayes.predict(X_test)
-#         accuracy = accuracy_score(y_test, y_pred)
-#         print("Precisión del modelo de Naive Bayes:", accuracy)
+        data = request.get_json()
 
-#         ###################################################
+        new_data = {
+            'Sadness': data['Sadness'],
+            'Exhausted': data['Exhausted'],
+            'Euphoric': data['agotamiento'],
+            'Sleep dissorder': data['insomnio'],
+            'Mood Swing': data['cambio_humor'],
+            'Suicidal thoughts': data['pensamientos_suicidas'],
+            'Anorxia': data['anorexia'],
+            'Authority Respect': data['respeto_autoridad'],
+            'Try-Explanation': data['intentado_explicar'],
+            'Aggressive Response': data['respuesta_agresiva'],
+            'Ignore & Move-On': data['ignorar_problemas'],
+            'Nervous Break-down': data['colapso_emocional'],
+            'Admit Mistakes': data['admitir_errores'],
+            'Overthinking': data['sobreanalizar'],
+            'Sexual Activity': data['actividad_sexual'],
+            'Concentration': data['concentracion'],
+            'Optimisim': data['optimismo']
+        }
 
+        new_data_df = pd.DataFrame(new_data, index=[0])
 
-#         new_data = {
-#             'Sadness': 2,
-#             'Exhausted': 1,
-#             'Euphoric': 0,
-#             'Sleep dissorder': 1,  
-#             'Mood Swing': 0,
-#             'Suicidal thoughts': 0,
-#             'Anorxia': 0,
-#             'Authority Respect': 1,
-#             'Try-Explanation': 1,
-#             'Aggressive Response': 0,
-#             'Ignore & Move-On': 0,
-#             'Nervous Break-down': 0,
-#             'Admit Mistakes': 1,
-#             'Overthinking': 1,
-#             'Sexual Activity': 1,
-#             'Concentration': 1,
-#             'Optimisim': 0  
-#         }
+        for column in new_data_df.columns:
+            new_data_df[column] = labelencoder.transform([new_data_df[column]])[0]
 
-#         new_data_df = pd.DataFrame(new_data, index=[0])
+        column_order = X_train.columns
+        new_data_df = new_data_df[column_order]
+        prediction = naive_bayes.predict(new_data_df)
+        predicted_disorder_label = labelencoder.inverse_transform(prediction)[0]
 
-#         for column in new_data_df.columns:
-#             new_data_df[column] = labelencoder.transform([new_data_df[column]])[0]
+        # Mapeo de números a etiquetas de trastornos mentales
+        diagnose_mapping = {
+            0: 'Bipolar Type-1',
+            1: 'Bipolar Type-2',
+            2: 'Depression',
+            3: 'Normal'
+        }
+        return jsonify({'predicted_disorder': diagnose_mapping[predicted_disorder_label]})
 
-#         column_order = X_train.columns
-#         new_data_df = new_data_df[column_order]
-#         prediction = naive_bayes.predict(new_data_df)
-#         predicted_disorder_label = labelencoder.inverse_transform(prediction)[0]
-
-#         print("Trastorno mental predicho:", predicted_disorder_label)
-
-#         ######
-#     except Exception as e:
-#         print(e)
-#         return jsonify({"informacion":e})
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)})
 
 if __name__=="__main__":
     app.run(port=3000,debug=True)
