@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2024 a las 05:58:04
+-- Tiempo de generación: 17-04-2024 a las 10:31:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -47,22 +47,44 @@ CREATE TABLE `cita` (
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
   `sede` enum('soledad','barranquilla-paz') NOT NULL,
-  `estado` enum('pendiente','confirmada','cancelada','finalizada') NOT NULL DEFAULT 'pendiente'
+  `estado` enum('disponible','agendada','finalizada') NOT NULL DEFAULT 'disponible'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `historial_avance`
+-- Volcado de datos para la tabla `cita`
 --
 
-CREATE TABLE `historial_avance` (
-  `id_historial` int(11) NOT NULL,
-  `id_paciente` int(11) NOT NULL,
-  `id_psicologo` int(11) NOT NULL,
-  `contenido` text NOT NULL,
-  `fecha_historial` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `cita` (`id_cita`, `id_psicologo`, `id_paciente`, `fecha`, `hora`, `sede`, `estado`) VALUES
+(1, 1, NULL, '2024-04-26', '14:00:00', 'soledad', 'disponible'),
+(2, 1, NULL, '2024-04-27', '08:00:00', 'barranquilla-paz', 'disponible'),
+(3, 1, NULL, '2024-04-17', '15:00:00', 'soledad', 'disponible'),
+(4, 1, NULL, '2024-04-28', '15:00:00', 'soledad', 'disponible'),
+(5, 1, NULL, '2024-04-27', '14:00:00', 'soledad', 'disponible'),
+(6, 2, NULL, '2024-04-24', '08:00:00', 'barranquilla-paz', 'disponible'),
+(7, 2, NULL, '2024-04-25', '15:00:00', 'soledad', 'disponible'),
+(8, 2, NULL, '2024-04-25', '08:00:00', 'barranquilla-paz', 'disponible'),
+(9, 2, NULL, '2024-04-21', '14:00:00', 'soledad', 'disponible'),
+(10, 2, NULL, '2024-04-26', '08:00:00', 'soledad', 'disponible'),
+(11, 4, NULL, '2024-04-28', '14:00:00', 'soledad', 'disponible'),
+(12, 4, NULL, '2024-04-20', '08:00:00', 'barranquilla-paz', 'disponible'),
+(13, 4, NULL, '2024-04-24', '08:00:00', 'barranquilla-paz', 'disponible'),
+(14, 4, NULL, '2024-04-19', '08:00:00', 'soledad', 'disponible'),
+(15, 4, NULL, '2024-04-22', '15:00:00', 'soledad', 'disponible'),
+(16, 5, NULL, '2024-04-28', '09:00:00', 'barranquilla-paz', 'disponible'),
+(17, 5, NULL, '2024-04-27', '10:00:00', 'soledad', 'disponible'),
+(18, 5, NULL, '2024-04-25', '14:00:00', 'soledad', 'disponible'),
+(19, 5, NULL, '2024-04-28', '17:00:00', 'soledad', 'disponible'),
+(20, 5, NULL, '2024-04-17', '11:00:00', 'barranquilla-paz', 'disponible'),
+(21, 6, NULL, '2024-04-17', '09:00:00', 'soledad', 'disponible'),
+(22, 6, NULL, '2024-04-21', '10:00:00', 'soledad', 'disponible'),
+(23, 6, NULL, '2024-04-21', '15:00:00', 'soledad', 'disponible'),
+(24, 6, NULL, '2024-04-28', '14:00:00', 'soledad', 'disponible'),
+(25, 6, NULL, '2024-04-21', '17:00:00', 'barranquilla-paz', 'disponible'),
+(26, 3, NULL, '2024-04-18', '11:00:00', 'soledad', 'disponible'),
+(27, 3, NULL, '2024-04-25', '09:00:00', 'barranquilla-paz', 'disponible'),
+(28, 3, NULL, '2024-04-30', '08:00:00', 'soledad', 'disponible'),
+(29, 3, NULL, '2024-04-25', '14:00:00', 'soledad', 'disponible'),
+(30, 3, NULL, '2024-04-30', '10:00:00', 'barranquilla-paz', 'disponible');
 
 -- --------------------------------------------------------
 
@@ -166,14 +188,6 @@ ALTER TABLE `cita`
   ADD KEY `id_paciente` (`id_paciente`);
 
 --
--- Indices de la tabla `historial_avance`
---
-ALTER TABLE `historial_avance`
-  ADD PRIMARY KEY (`id_historial`),
-  ADD KEY `id_paciente` (`id_paciente`),
-  ADD KEY `id_psicologo` (`id_psicologo`);
-
---
 -- Indices de la tabla `paciente`
 --
 ALTER TABLE `paciente`
@@ -218,19 +232,13 @@ ALTER TABLE `avance_personal`
 -- AUTO_INCREMENT de la tabla `cita`
 --
 ALTER TABLE `cita`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `historial_avance`
---
-ALTER TABLE `historial_avance`
-  MODIFY `id_historial` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id_paciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `psicologo`
@@ -266,13 +274,6 @@ ALTER TABLE `avance_personal`
 ALTER TABLE `cita`
   ADD CONSTRAINT `cita_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cita_ibfk_2` FOREIGN KEY (`id_psicologo`) REFERENCES `psicologo` (`id_psicologo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `historial_avance`
---
-ALTER TABLE `historial_avance`
-  ADD CONSTRAINT `historial_avance_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `historial_avance_ibfk_2` FOREIGN KEY (`id_psicologo`) REFERENCES `psicologo` (`id_psicologo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `publicacion`
