@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <strong>Título:</strong> ${tarea.titulo}<br>
                         <strong>Descripción:</strong> ${tarea.descripcion}<br>
                         <strong>Psicólogo asignado:</strong> ${tarea.nombre_psicologo}<br>
-                        <button class="btn btn-primary marcar-completada" data-id="${tarea.id}">Marcar como completada</button>
+                        <button class="btn btn-primary marcar-completada" data-id="${tarea.id}" >Marcar como completada</button>
                         <hr>
                     `;
                     listaTareasPendientes.appendChild(tareaElemento);
@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelectorAll('.marcar-completada').forEach(boton => {
                     boton.addEventListener('click', function () {
                         const tareaId = boton.dataset.id;
-
+                        console.log(tareaId)
                         
                         axios.post('http://localhost:3000/marcar_como_completada', { tarea_id: tareaId })
-                            .then(function (response) {
+                            .then(function(response) {
                                 
                                 const tareaCompletada = boton.parentNode;
                                 const listaTareasCompletadas = document.getElementById('tareascompletadas');
