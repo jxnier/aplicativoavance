@@ -527,69 +527,53 @@ def buscar_citas():
         return jsonify({'error': str(e)})
 
 ########################################################### Predecir paciente ####################################################
+
+
+
+# Cargar y preparar los datos
+ruta_archivo = "C:/xampp/htdocs/aplicativoavance/python/Dataset-Mental-Disorders.csv"
+df = pd.read_csv(ruta_archivo)
+df = df.drop(columns=['Patient Number'])
+
+labelencoder = LabelEncoder()
+for column in df.columns:
+    df[column] = labelencoder.fit_transform(df[column])
+
+X = df.drop('Expert Diagnose', axis=1)
+y = df['Expert Diagnose']
+y = labelencoder.fit_transform(y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+
+# Entrenar el modelo de Naive Bayes
+naive_bayes = GaussianNB()
+naive_bayes.fit(X_train, y_train)
+
+
 @app.route('/prediccion', methods=['POST'])
 def prediccion():
-    try:
-        ruta_archivo = ("C:/xampp/htdocs/aplicativoavance/python/Dataset-Mental-Disorders.csv")
-        df = pd.read_csv(ruta_archivo)
-        df = df.drop(columns=['Patient Number'])
-        labelencoder = LabelEncoder()
-        for column in df.columns:
-            df[column] = labelencoder.fit_transform(df[column])
-        X = df.drop('Expert Diagnose', axis=1)
-        y = df['Expert Diagnose']
-        y = labelencoder.fit_transform(y)
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
-        naive_bayes = GaussianNB()
-        naive_bayes.fit(X_train, y_train)
-        y_pred = naive_bayes.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
-        print("Precisión del modelo de Naive Bayes:", accuracy)
 
-        data = request.get_json()
+    print("Nombres de características utilizadas durante el entrenamiento:")
+    print(X_train.columns)
+    data = request.get_json()
 
-        new_data = {
-            'Sadness': data['Sadness'],
-            'Exhausted': data['Exhausted'],
-            'Euphoric': data['agotamiento'],
-            'Sleep dissorder': data['insomnio'],
-            'Mood Swing': data['cambio_humor'],
-            'Suicidal thoughts': data['pensamientos_suicidas'],
-            'Anorxia': data['anorexia'],
-            'Authority Respect': data['respeto_autoridad'],
-            'Try-Explanation': data['intentado_explicar'],
-            'Aggressive Response': data['respuesta_agresiva'],
-            'Ignore & Move-On': data['ignorar_problemas'],
-            'Nervous Break-down': data['colapso_emocional'],
-            'Admit Mistakes': data['admitir_errores'],
-            'Overthinking': data['sobreanalizar'],
-            'Sexual Activity': data['actividad_sexual'],
-            'Concentration': data['concentracion'],
-            'Optimisim': data['optimismo']
-        }
+    # Crear un dataframe con los datos del formulario
+    new_data_df = pd.DataFrame(data, index=[0])
+    column_order = X_train.columns
+    new_data_df = new_data_df[column_order]
 
-        new_data_df = pd.DataFrame(new_data, index=[0])
+    # Hacer la predicción
+    prediction = naive_bayes.predict(new_data_df)
+    predicted_disorder_label = labelencoder.inverse_transform(prediction)[0]
 
-        for column in new_data_df.columns:
-            new_data_df[column] = labelencoder.transform([new_data_df[column]])[0]
+    # Mapeo de números a etiquetas de trastornos mentales
+    diagnose_mapping = {
+        0: 'Bipolar Type-1',
+        1: 'Bipolar Type-2',
+        2: 'Depression',
+        3: 'Normal'
+    }
 
-        column_order = X_train.columns
-        new_data_df = new_data_df[column_order]
-        prediction = naive_bayes.predict(new_data_df)
-        predicted_disorder_label = labelencoder.inverse_transform(prediction)[0]
-
-        # Mapeo de números a etiquetas de trastornos mentales
-        diagnose_mapping = {
-            0: 'Bipolar Type-1',
-            1: 'Bipolar Type-2',
-            2: 'Depression',
-            3: 'Normal'
-        }
-        return jsonify({'predicted_disorder': diagnose_mapping[predicted_disorder_label]})
-
-    except Exception as e:
-        print(e)
-        return jsonify({"error": str(e)})
+    return jsonify({'predicted_disorder': diagnose_mapping[predicted_disorder_label]})
 
 if __name__=="__main__":
     app.run(port=3000,debug=True)
