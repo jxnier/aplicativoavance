@@ -47,28 +47,28 @@
             </div>      
         </div>
       <div class="m-0 border-0">
-        <form class="needs-validation was-validated" novalidate="">
+        <form class="needs-validation was-validated" novalidate="" onsubmit="sendFormData(); return false;" >
           <div class="row p-3 align-items-center" style="background-color: #f5f0f7; border-radius: 16px">
             <h4>Que tan frecuente...</h4>
             <br />
             <div class="form-group col-md-6">
-              <label for="tristeza">¿Qué tan frecuente te sientes triste?</label>
-              <select class="form-control" id="tristeza">
+              <label for="Sadness">¿Qué tan frecuente te sientes triste?</label>
+              <select class="form-control" id="Sadness">
                 <option value="" disabled selected="">Que tan frecuente</option>
-                <option value="Most-often">La mayoría de las veces</option>
-                <option value="Usually">Por lo general</option>
-                <option value="Sometimes">A veces</option>
-                <option value="Seldom">Rara vez</option>
+                <option value="0">La mayoría de las veces</option>
+                <option value="3">Por lo general</option>
+                <option value="2">A veces</option>
+                <option value="1">Rara vez</option>
               </select>
             </div>
             <div class="form-group col-md-6">
-              <label for="euforia">¿Qué tan frecuente te sientes eufórico?</label>
-              <select class="form-control" id="euforia">
+              <label for="Euphoric">¿Qué tan frecuente te sientes eufórico?</label>
+              <select class="form-control" id="Euphoric">
                 <option value="" disabled selected>Que tan frecuente</option>
-                <option value="Most-often">La mayoría de las veces</option>
-                <option value="Usually">Por lo general</option>
-                <option value="Sometimes">A veces</option>
-                <option value="Seldom">Rara vez</option>
+                <option value="0">La mayoría de las veces</option>
+                <option value="3">Por lo general</option>
+                <option value="2">A veces</option>
+                <option value="1">Rara vez</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -77,10 +77,10 @@
               >
               <select class="form-control" id="agotamiento">
                 <option value="" disabled selected>Que tan frecuente</option>
-                <option value="Most-often">La mayoría de las veces</option>
-                <option value="Usually">Por lo general</option>
-                <option value="Sometimes">A veces</option>
-                <option value="Seldom">Rara vez</option>
+                <option value="0">La mayoría de las veces</option>
+                <option value="3">Por lo general</option>
+                <option value="2">A veces</option>
+                <option value="1">Rara vez</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -89,10 +89,10 @@
               >
               <select class="form-control" id="insomnio">
                 <option value="" disabled selected>Que tan frecuente</option>
-                <option value="Most-often">La mayoría de las veces</option>
-                <option value="Usually">Por lo general</option>
-                <option value="Sometimes">A veces</option>
-                <option value="Seldom">Rara vez</option>
+                <option value="0">La mayoría de las veces</option>
+                <option value="3">Por lo general</option>
+                <option value="2">A veces</option>
+                <option value="1">Rara vez</option>
               </select>
             </div>
           </div>
@@ -108,47 +108,47 @@
               >
               <select class="form-control" id="actividad_sexual">
                 <option value="" disabled selected>Del 1 al 10</option>
-                <option value="1 From 10">1 de 10</option>
-                <option value="2 From 10">2 de 10</option>
-                <option value="3 From 10">3 de 10</option>
-                <option value="4 From 10">4 de 10</option>
-                <option value="5 From 10">5 de 10</option>
-                <option value="6 From 10">6 de 10</option>
-                <option value="7 From 10">7 de 10</option>
-                <option value="8 From 10">8 de 10</option>
-                <option value="9 From 10">9 de 10</option>
-                <option value="10 From 10">10 de 10</option>
+                <option value="0">1 de 10</option>
+                <option value="1">2 de 10</option>
+                <option value="2">3 de 10</option>
+                <option value="3">4 de 10</option>
+                <option value="4">5 de 10</option>
+                <option value="5">6 de 10</option>
+                <option value="6">7 de 10</option>
+                <option value="7">8 de 10</option>
+                <option value="8">9 de 10</option>
+                <option value="9">10 de 10</option>
               </select>
             </div>
             <div class="form-group col-md-6">
               <label for="concentracion">¿Qué tan concentrado te sientes?</label>
               <select class="form-control" id="concentracion">
                 <option value="" disabled selected>Del 1 al 10</option>
-                <option value="1 From 10">1 de 10</option>
-                <option value="2 From 10">2 de 10</option>
-                <option value="3 From 10">3 de 10</option>
-                <option value="4 From 10">4 de 10</option>
-                <option value="5 From 10">5 de 10</option>
-                <option value="6 From 10">6 de 10</option>
-                <option value="7 From 10">7 de 10</option>
-                <option value="8 From 10">8 de 10</option>
-                <option value="9 From 10">9 de 10</option>
-                <option value="10 From 10">10 de 10</option>
+                <option value="0">1 de 10</option>
+                <option value="1">2 de 10</option>
+                <option value="2">3 de 10</option>
+                <option value="3">4 de 10</option>
+                <option value="4">5 de 10</option>
+                <option value="5">6 de 10</option>
+                <option value="6">7 de 10</option>
+                <option value="7">8 de 10</option>
+                <option value="8">9 de 10</option>
+                <option value="9">10 de 10</option>
               </select>
             </div>
             <div class="form-group col-md-6">
               <label for="optimismo">¿Qué tan optimista eres?</label>
               <select class="form-control" id="optimismo">
-                <option value="1 From 10">1 de 10</option>
-                <option value="2 From 10">2 de 10</option>
-                <option value="3 From 10">3 de 10</option>
-                <option value="4 From 10">4 de 10</option>
-                <option value="5 From 10">5 de 10</option>
-                <option value="6 From 10">6 de 10</option>
-                <option value="7 From 10">7 de 10</option>
-                <option value="8 From 10">8 de 10</option>
-                <option value="9 From 10">9 de 10</option>
-                <option value="10 From 10">10 de 10</option>
+                <option value="0">1 de 10</option>
+                <option value="1">2 de 10</option>
+                <option value="2">3 de 10</option>
+                <option value="3">4 de 10</option>
+                <option value="4">5 de 10</option>
+                <option value="5">6 de 10</option>
+                <option value="6">7 de 10</option>
+                <option value="7">8 de 10</option>
+                <option value="8">9 de 10</option>
+                <option value="9">10 de 10</option>
               </select>
             </div>
           </div>
@@ -162,8 +162,8 @@
               <label for="cambio_humor">¿Cambias de humor de la nada?</label>
               <select class="form-control" id="cambio_humor">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -172,8 +172,8 @@
               >
               <select class="form-control" id="pensamientos_suicidas">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -183,8 +183,8 @@
               >
               <select class="form-control" id="anorexia">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -194,8 +194,8 @@
               >
               <select class="form-control" id="respeto_autoridad">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -204,8 +204,8 @@
               >
               <select class="form-control" id="intentado_explicar">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -214,8 +214,8 @@
               >
               <select class="form-control" id="respuesta_agresiva">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -224,8 +224,8 @@
               >
               <select class="form-control" id="ignorar_problemas">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -234,8 +234,8 @@
               >
               <select class="form-control" id="colapso_emocional">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -244,8 +244,8 @@
               >
               <select class="form-control" id="admitir_errores">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
             <div class="form-group col-md-6">
@@ -254,14 +254,16 @@
               >
               <select class="form-control" id="sobreanalizar">
                 <option value="" disabled selected>Si o no</option>
-                <option value="YES">Si</option>
-                <option value="NO">No</option>
+                <option value="1">Si</option>
+                <option value="0">No</option>
               </select>
             </div>
           </div>
           <div style="display: flex; align-self: center;justify-content: center;" class="d-grid"><button style="width: 200px;" type="submit" class="btn btn-success btn-md">Enviar</button></div>        
         </form>
+    <script src="../../js/IA/ia.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 </body>
 </html>
