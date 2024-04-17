@@ -64,7 +64,7 @@ def tabla():
             for paciente in pacientes:
                 payload["pacientes"].append({
                     'id': paciente[0],
-                    'nombre': paciente[1],
+                    'nombres': paciente[1],
                     'identificacion': paciente[5],
                     'correo_institucional': paciente[2]
                 })

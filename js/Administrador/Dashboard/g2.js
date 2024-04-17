@@ -4,7 +4,7 @@ var myChart= new Chart(grafica1,{
     data:{
         labels:["Barranquilla","Soledad"],
         datasets:[{
-                label:"Citas por sede",
+                label:"Citas por sede en esta semana ",
                 data:[50,39],
                 backgroundColor:[
                     'rgb(220, 180, 255)',

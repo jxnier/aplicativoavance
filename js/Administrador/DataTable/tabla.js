@@ -11,9 +11,9 @@ $(document).ready(function() {
                     data = data.concat(json.pacientes.map(function(paciente) {
                         return {
                             "id": paciente.id,
-                            "nombre": paciente.nombre ?? "", // Establecer como cadena vacía si es null
-                            "identificacion": paciente.identificacion ?? "", // Establecer como cadena vacía si es null
-                            "correo_institucional": paciente.correo_institucional ?? "" // Establecer como cadena vacía si es null
+                            "nombre": paciente.nombres ?? "",
+                            "identificacion": paciente.identificacion ?? "", 
+                            "correo_institucional": paciente.correo_institucional ?? "" 
                         };
                     }));
                 }

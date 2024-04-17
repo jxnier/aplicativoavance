@@ -2,7 +2,7 @@ const grafica3 = document.getElementById("grafica3").getContext("2d");
 const etiquetas3 = ["Administrador", "Paciente", "Psicologo",]
 const datosVentas20203 = {
     label: "Indice de registro al aplicativo",
-    data: [25, 150,60], 
+    data: [2, 15,10], 
     backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
     borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
     borderWidth: 1,// Ancho del borde
