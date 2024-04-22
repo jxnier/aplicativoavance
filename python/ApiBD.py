@@ -501,7 +501,7 @@ def psico():
             payload = []
             content = {}
             for result in rv:
-                content = {'nombre': result[1], 'tipo_documento': result[4], 'identificacion': result[5], 'correo_institucional': result[2], 'grado_salud': result[7],'historial_clinico': result[8]}
+                content = {'nombre': result[1], 'tipo_documento': result[4], 'identificacion': result[5], 'correo_institucional': result[2], 'grado_salud': result[7]}
                 payload.append(content)
                 content = {}
             return jsonify(payload)
