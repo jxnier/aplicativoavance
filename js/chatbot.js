@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     "respuesta": "¡Hola! Soy Psique, su asistente virtual. ¿En qué puedo ayudarle?    1. ¿Dónde puedo pedir una cita?  2. ¿Para qué es la IA de predicción?  3. ¿Qué son las tareas?  4. ¿Como contactar con soporte sobre algun PQR ?  5. ¿Qué más actividades brinda la universidad para los estudiantes?    Por favor, elija el número de la pregunta que desea hacer."
                 },
                 {
-                    "preguntas": ["1", "pedir citas", "citas", "quiero una cita"],
+                    "preguntas": ["1", "pedir citas", "cita", "citas",  "necesito una cita","quiero una cita"],
                     "respuesta": "Existen dos opciones para pedir una cita:  1. De manera presencial, acercándote hacia Bienestar institucional en las sedes Soledad o Barranquilla plaza de la paz.  2. De manera virtual, registrándote e iniciando sesión para pedir una cita.    Además, para solicitar atención médica o asesorías en salud, escríbe a salud@unibarranquilla.edu.co"
                 },
                 {
