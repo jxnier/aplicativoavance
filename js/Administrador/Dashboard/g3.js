@@ -1,28 +1,26 @@
-const grafica3 = document.getElementById("grafica3").getContext("2d");
-const etiquetas3 = ["Administrador", "Paciente", "Psicologo",]
-const datosVentas20203 = {
-    label: "Indice de registro al aplicativo",
-    data: [2, 15,10], 
-    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
-    borderColor: 'rgba(54, 162, 235, 1)', // Color del borde
-    borderWidth: 1,// Ancho del borde
-};
-new Chart(grafica3, {
-    type: 'bar',// Tipo de gráfica
-    data: {
-        labels: etiquetas3,
-        datasets: [
-            datosVentas20203,
-            // Aquí más datos...
-        ]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }],
-        },
-    }
-});
+fetch('http://localhost:3000/grafica_predicciones_ia')
+  .then(response => response.json())
+  .then(data => {
+    const ctx = document.getElementById('grafica_predicciones_ia').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: data.labels,
+        datasets: [{
+          label: 'Cantidad de pacientes',
+          data: data.valores,
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: 'Distribución de pacientes por predicción de IA'
+          }
+        }
+      }
+    });
+  })
+  .catch(error => console.error(error));

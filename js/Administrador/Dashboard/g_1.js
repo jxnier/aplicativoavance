@@ -27,3 +27,7 @@ fetch('http://localhost:3000/grafica_tipo_documento')
     });
   })
   .catch(error => console.error(error));
+
+
+
+  

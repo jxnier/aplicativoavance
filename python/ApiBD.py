@@ -348,6 +348,94 @@ def grafica_tipo_documento():
         return jsonify({'error': str(e)})
     
 
+@app.route('/tareas_completadas_por_psicologo', methods=['GET'])
+def tareas_completadas_por_psicologo():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT ps.nombre AS psicologo, COUNT(t.id_tarea) AS cantidad_tareas_completadas FROM psicologo ps INNER JOIN tarea t ON ps.id_psicologo = t.id_psicologo WHERE t.completada = 1 GROUP BY ps.nombre")
+        data = cursor.fetchall()
+        cursor.close()
+        nombres_psicologos = []
+        cantidades = []
+        for row in data:
+            nombres_psicologos.append(row[0])
+            cantidades.append(row[1])
+        return jsonify({'nombres_psicologos': nombres_psicologos, 'cantidades': cantidades})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
+
+@app.route('/grafica_predicciones_ia', methods=['GET'])
+def grafica_predicciones_ia():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT prediccion_ia, COUNT(*) AS cantidad FROM paciente WHERE prediccion_ia IS NOT NULL GROUP BY prediccion_ia")
+        data = cursor.fetchall()
+        cursor.close()
+        labels = []
+        valores = []
+        for row in data:
+            labels.append(row[0])
+            valores.append(row[1])
+        return jsonify({'labels': labels, 'valores': valores})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+    
+@app.route('/grafica_tipos_publicaciones', methods=['GET'])
+def grafica_tipos_publicaciones():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT tipo, COUNT(*) AS cantidad FROM publicacion GROUP BY tipo")
+        data = cursor.fetchall()
+        cursor.close()
+        labels = []
+        valores = []
+        for row in data:
+            labels.append(row[0])
+            valores.append(row[1])
+        return jsonify({'labels': labels, 'valores': valores})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+    
+@app.route('/grafica_tareas_psicologos', methods=['GET'])
+def grafica_tareas_psicologos():
+    try:
+        cursor = mysql.connection.cursor()
+        # Consulta SQL para obtener datos de tareas completadas
+        cursor.execute("SELECT completada, COUNT(*) AS cantidad FROM tarea GROUP BY completada")
+        data = cursor.fetchall()
+
+        cursor.close()
+        
+        # Procesamiento de los datos para la respuesta JSON
+        labels = []
+        valores = []
+        for row in data:
+            labels.append(str(row[0]))
+            valores.append(row[1])
+
+        return jsonify({'labels': labels, 'valores': valores})
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
+@app.route('/pacientes_por_tipo_documento_y_prediccion_ia', methods=['GET'])
+def pacientes_por_tipo_documento_y_prediccion_ia():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT tipo_documento, prediccion_ia, COUNT(*) AS cantidad_pacientes FROM paciente WHERE prediccion_ia IS NOT NULL GROUP BY tipo_documento, prediccion_ia")
+        data = cursor.fetchall()
+        cursor.close()
+        resultados = []
+        for row in data:
+            resultados.append({'tipo_documento': row[0], 'prediccion_ia': row[1], 'cantidad_pacientes': row[2]})
+        return jsonify({'resultados': resultados})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
 ########################################################## OBTENER PACIENTES ######################################
 
 @app.route('/allpaciente', methods=['GET'])
@@ -461,7 +549,7 @@ def psico():
             payload = []
             content = {}
             for result in rv:
-                content = {'nombre': result[1], 'tipo_documento': result[4], 'identificacion': result[5], 'correo_institucional': result[2], 'grado_salud': result[7],'historial_clinico': result[8]}
+                content = {'nombre': result[1], 'tipo_documento': result[4], 'identificacion': result[5], 'correo_institucional': result[2], 'grado_salud': result[7]}
                 payload.append(content)
                 content = {}
             return jsonify(payload)
