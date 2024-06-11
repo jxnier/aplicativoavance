@@ -1,5 +1,4 @@
 // Registrar Paciente
-
 const registrar_paciente = (event) => {
     event.preventDefault();
 

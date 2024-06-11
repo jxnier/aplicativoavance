@@ -43,46 +43,6 @@ def registrar_paciente():
         print(e)
         return jsonify({"informacion":e})
 
-########################################### Mostrar tabla 'paciente' en datatable ####################################################
-
-@app.route('/tabla', methods=['GET'])
-def tabla():
-    try:
-        if request.method == 'GET':
-            cur = mysql.connection.cursor()
-            cur.execute('SELECT * FROM paciente')
-            pacientes = cur.fetchall()
-            cur.execute('SELECT * FROM psicologo')
-            psicologos = cur.fetchall()
-            cur.close()
-
-            payload = {
-                "pacientes": [],
-                "psicologos": []
-            }
-
-            for paciente in pacientes:
-                payload["pacientes"].append({
-                    'id': paciente[0],
-                    'nombres': paciente[1],
-                    'identificacion': paciente[5],
-                    'correo_institucional': paciente[2]
-                })
-
-            for psicologo in psicologos:
-                payload["psicologos"].append({
-                    'id': psicologo[0],
-                    'nombre': psicologo[1],
-                    'identificacion': psicologo[4],
-                    'correo_institucional': psicologo[2]
-                })
-
-            return jsonify(payload)
-
-    except Exception as e:
-        print(e)
-        return jsonify({"información": str(e)})
-
 
 
 ####################################################### Iniciar sesión por rol #######################################################

@@ -48,7 +48,6 @@ function registrarAvancePersonal() {
 }
 
 
-
 function obtenerAvancesPersonales() {
     if (tu.correo_institucional) {
         axios.get(`http://localhost:3000/obtener_avances?correo=${tu.correo_institucional}`)
