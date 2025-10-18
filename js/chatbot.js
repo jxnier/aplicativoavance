@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
             chatboxMessage.classList.toggle('show');
         });
 
-        // Close chatbox when clicking outside
         document.addEventListener('click', function (e) {
             if (!chatboxMessage.contains(e.target) && !chatboxToggle.contains(e.target)) {
                 chatboxMessage.classList.remove('show');
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // DROPDOWN TOGGLE
     const dropdownToggle = document.querySelector('.chatbox-message-dropdown-toggle');
     const dropdownMenu = document.querySelector('.chatbox-message-dropdown-menu');
 
